@@ -62,14 +62,14 @@ void main() {
           .copyWith
           .two
           .threes
-          .replaceFirst(Three('XXX'), (element) => element.name == '31');
+          .replaceFirstWhere(Three('XXX'), (element) => element.name == '31');
       expect(var3, isNot(var21));
       final var4 = var3.copyWith
           .two(name: '2')
           .copyWith
           .two
           .threes
-          .replaceFirst(Three('31'), (element) => element.name == 'XXX');
+          .replaceFirstWhere(Three('31'), (element) => element.name == 'XXX');
       expect(var4, equals(var21));
     });
 
@@ -95,7 +95,7 @@ void main() {
         ],
       );
 
-      final var2 = var1.copyWith.replaceFirst(
+      final var2 = var1.copyWith.replaceFirstWhere(
           Collector(FreezedList(
             [
               Numbers(FreezedList([5, 5, 5, 5])),

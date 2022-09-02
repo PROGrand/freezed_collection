@@ -21,12 +21,12 @@ void main() {
 
   print(restoredCompany);
 
-  Company? newCompany = company.copyWith.director.assistants.replaceFirst(
+  Company? newCompany = company.copyWith.director.assistants.replaceFirstWhere(
     Assistant(age: 2, name: '2'),
     (element) => element.age == 1,
   );
 
-  Company? newCompany2 = newCompany.copyWith.director.assistants.replaceFirst(
+  Company? newCompany2 = newCompany.copyWith.director.assistants.replaceFirstWhere(
     Assistant(age: 1, name: '1'),
     (element) => element.age == 2,
   );

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:freezed_collection/src/copy_on_write_list.dart';
 
@@ -192,8 +194,8 @@ class $FreezedListCopyWith<T, $Res> {
   }
 
   /// Replace element according to what() with newElement.
-  $Res replaceFirst(T newElement, bool Function(T element) what) {
-    final index = _value.list.indexWhere((element) => what(element));
+  $Res replaceFirstWhere(T newElement, bool Function(T element) test) {
+    final index = _value.list.indexWhere((element) => test(element));
     if (-1 != index) {
       var newList = _value.list.toList();
       newList[index] = newElement;
@@ -201,5 +203,140 @@ class $FreezedListCopyWith<T, $Res> {
     } else {
       return __then(FreezedList<T>(_value.list));
     }
+  }
+
+  $Res removeFirstWhere(bool Function(T element) test) {
+    final index = _value.list.indexWhere((element) => test(element));
+    if (-1 != index) {
+      var newList = _value.list.toList();
+      newList.removeAt(index);
+      return __then(FreezedList<T>(newList));
+    } else {
+      return __then(FreezedList<T>(_value.list));
+    }
+  }
+
+  $Res set(int index, T element) {
+    var newList = _value.list.toList();
+    newList[index] = element;
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res add(T value) {
+    var newList = _value.list.toList();
+    newList.add(value);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res addAll(Iterable<T> iterable) {
+    var newList = _value.list.toList();
+    newList.addAll(iterable);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res clear() {
+    return __then(FreezedList<T>([]));
+  }
+
+  $Res fillRange(int start, int end, [T? fillValue]) {
+    var newList = _value.list.toList();
+    newList.fillRange(start, end, fillValue);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res setFirst(T value) {
+    var newList = _value.list.toList();
+    newList.first = value;
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res insert(int index, T element) {
+    var newList = _value.list.toList();
+    newList.insert(index, element);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res insertAll(int index, Iterable<T> iterable) {
+    var newList = _value.list.toList();
+    newList.insertAll(index, iterable);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res setLast(T value) {
+    var newList = _value.list.toList();
+    newList.last = value;
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res setLength(int newLength) {
+    var newList = _value.list.toList();
+    newList.length = newLength;
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res remove(Object? value) {
+    var newList = _value.list.toList();
+    newList.remove(value);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res removeAt(int index) {
+    var newList = _value.list.toList();
+    newList.removeAt(index);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res removeLast() {
+    var newList = _value.list.toList();
+    newList.removeLast();
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res removeRange(int start, int end) {
+    var newList = _value.list.toList();
+    newList.removeRange(start, end);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res removeWhere(bool Function(T element) test) {
+    var newList = _value.list.toList();
+    newList.removeWhere(test);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res replaceRange(int start, int end, Iterable<T> replacements) {
+    var newList = _value.list.toList();
+    newList.replaceRange(start, end, replacements);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res retainWhere(bool Function(T element) test) {
+    var newList = _value.list.toList();
+    newList.retainWhere(test);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res setAll(int index, Iterable<T> iterable) {
+    var newList = _value.list.toList();
+    newList.setAll(index, iterable);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res setRange(int start, int end, Iterable<T> iterable, [int skipCount = 0]) {
+    var newList = _value.list.toList();
+    newList.setRange(start, end, iterable, skipCount);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res shuffle([Random? random]) {
+    var newList = _value.list.toList();
+    newList.shuffle(random);
+    return __then(FreezedList<T>(newList));
+  }
+
+  $Res sort([int Function(T a, T b)? compare]) {
+    var newList = _value.list.toList();
+    newList.sort(compare);
+    return __then(FreezedList<T>(newList));
   }
 }
