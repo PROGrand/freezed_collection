@@ -9,11 +9,15 @@ part 'freezed_list.freezed.dart';
     genericArgumentFactories: true,
     toJson: false,
     fromJson: false,
-    copyWith: false)
+    copyWith: false,
+    map: FreezedMapOptions.none)
 class FreezedList<T> with _$FreezedList<T> implements Iterable<T> {
   const FreezedList._();
 
-  const factory FreezedList(List<T> list) = _FreezedList<T>;
+  factory FreezedList([Iterable iterable = const []]) =>
+      FreezedList<T>.of(List<T>.from(iterable, growable: false));
+
+  const factory FreezedList.of(List<T> list) = _FreezedList<T>;
 
   @override
   String toString() => list.toString();

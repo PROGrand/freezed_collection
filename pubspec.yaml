@@ -2,7 +2,7 @@ name: freezed_collection
 authors:
   - Vladimir E. Koltunov (PROGrand)
 description: Extending dart:freezed to deep copyWith for collection.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/PROGrand/freezed_collection
 
 environment:

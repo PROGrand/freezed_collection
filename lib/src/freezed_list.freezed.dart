@@ -17,6 +17,22 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$FreezedList<T> {
   List<T> get list => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<T> list) of,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(List<T> list)? of,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<T> list)? of,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -44,6 +60,34 @@ class _$_FreezedList<T> extends _FreezedList<T> {
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_list));
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<T> list) of,
+  }) {
+    return of(list);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(List<T> list)? of,
+  }) {
+    return of?.call(list);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<T> list)? of,
+    required TResult orElse(),
+  }) {
+    if (of != null) {
+      return of(list);
+    }
+    return orElse();
+  }
 }
 
 abstract class _FreezedList<T> extends FreezedList<T> {
