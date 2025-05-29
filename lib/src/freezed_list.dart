@@ -1,9 +1,7 @@
 import 'dart:math' show Random;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:freezed_collection/src/copy_on_write_list.dart';
-
-// part 'freezed_list.freezed.dart';
+import 'package:freezed_collection/src/internal/copy_on_write_list.dart';
 
 @Freezed(
     genericArgumentFactories: true,
@@ -11,8 +9,6 @@ import 'package:freezed_collection/src/copy_on_write_list.dart';
     fromJson: false,
     copyWith: true)
 class FreezedList<T> with _$FreezedList<T> implements Iterable<T> {
-  // const FreezedList._();
-
   const FreezedList([this.list = const []]);
 
   @override

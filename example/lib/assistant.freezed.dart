@@ -87,8 +87,7 @@ class _$AssistantCopyWithImpl<$Res> implements $AssistantCopyWith<$Res> {
 @JsonSerializable()
 class _Assistant implements Assistant {
   _Assistant({this.name, this.age});
-  factory _Assistant.fromJson(Map<String, dynamic> json) =>
-      _$AssistantFromJson(json);
+  factory _Assistant.fromJson(Map<String, dynamic> json) => _$AssistantFromJson(json);
 
   @override
   final String? name;
@@ -130,10 +129,8 @@ class _Assistant implements Assistant {
 }
 
 /// @nodoc
-abstract mixin class _$AssistantCopyWith<$Res>
-    implements $AssistantCopyWith<$Res> {
-  factory _$AssistantCopyWith(
-          _Assistant value, $Res Function(_Assistant) _then) =
+abstract mixin class _$AssistantCopyWith<$Res> implements $AssistantCopyWith<$Res> {
+  factory _$AssistantCopyWith(_Assistant value, $Res Function(_Assistant) _then) =
       __$AssistantCopyWithImpl;
   @override
   @useResult

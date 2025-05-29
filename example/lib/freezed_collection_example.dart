@@ -13,8 +13,7 @@ void main() {
       name: '1',
       director: Director(
           name: 'director1',
-          assistants: FreezedList(
-              [Assistant(age: 1, name: '1'), Assistant(age: 3, name: '3')])));
+          assistants: FreezedList([Assistant(age: 1, name: '1'), Assistant(age: 3, name: '3')])));
 
   final jsonString = json.encode(company);
   final restoredCompany = Company.fromJson(json.decode(jsonString));
@@ -26,8 +25,7 @@ void main() {
     (element) => element.age == 1,
   );
 
-  Company? newCompany2 =
-      newCompany.copyWith.director.assistants.replaceFirstWhere(
+  Company? newCompany2 = newCompany.copyWith.director.assistants.replaceFirstWhere(
     Assistant(age: 1, name: '1'),
     (element) => element.age == 2,
   );
