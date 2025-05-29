@@ -6,12 +6,12 @@ part of 'assistant.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Assistant _$$_AssistantFromJson(Map<String, dynamic> json) => _$_Assistant(
+_Assistant _$AssistantFromJson(Map<String, dynamic> json) => _Assistant(
       name: json['name'] as String?,
-      age: json['age'] as int?,
+      age: (json['age'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$_AssistantToJson(_$_Assistant instance) =>
+Map<String, dynamic> _$AssistantToJson(_Assistant instance) =>
     <String, dynamic>{
       'name': instance.name,
       'age': instance.age,

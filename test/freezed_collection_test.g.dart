@@ -1,56 +1,57 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint
+
 part of 'freezed_collection_test.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_One _$$_OneFromJson(Map<String, dynamic> json) => _$_One(
+_One _$OneFromJson(Map<String, dynamic> json) => _One(
       json['name'] as String,
       Two.fromJson(json['two'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_OneToJson(_$_One instance) => <String, dynamic>{
+Map<String, dynamic> _$OneToJson(_One instance) => <String, dynamic>{
       'name': instance.name,
       'two': instance.two,
     };
 
-_$_Two _$$_TwoFromJson(Map<String, dynamic> json) => _$_Two(
+_Two _$TwoFromJson(Map<String, dynamic> json) => _Two(
       json['name'] as String,
       FreezedList<Three>.fromJson(json['threes'] as List<dynamic>,
           (value) => Three.fromJson(value as Map<String, dynamic>)),
     );
 
-Map<String, dynamic> _$$_TwoToJson(_$_Two instance) => <String, dynamic>{
+Map<String, dynamic> _$TwoToJson(_Two instance) => <String, dynamic>{
       'name': instance.name,
       'threes': instance.threes,
     };
 
-_$_Three _$$_ThreeFromJson(Map<String, dynamic> json) => _$_Three(
+_Three _$ThreeFromJson(Map<String, dynamic> json) => _Three(
       json['name'] as String,
     );
 
-Map<String, dynamic> _$$_ThreeToJson(_$_Three instance) => <String, dynamic>{
+Map<String, dynamic> _$ThreeToJson(_Three instance) => <String, dynamic>{
       'name': instance.name,
     };
 
-_$_Collector _$$_CollectorFromJson(Map<String, dynamic> json) => _$_Collector(
+_Collector _$CollectorFromJson(Map<String, dynamic> json) => _Collector(
       FreezedList<Numbers>.fromJson(json['numbers'] as List<dynamic>,
           (value) => Numbers.fromJson(value as Map<String, dynamic>)),
     );
 
-Map<String, dynamic> _$$_CollectorToJson(_$_Collector instance) =>
+Map<String, dynamic> _$CollectorToJson(_Collector instance) =>
     <String, dynamic>{
       'numbers': instance.numbers,
     };
 
-_$_Numbers _$$_NumbersFromJson(Map<String, dynamic> json) => _$_Numbers(
+_Numbers _$NumbersFromJson(Map<String, dynamic> json) => _Numbers(
       FreezedList<int>.fromJson(
-          json['values'] as List<dynamic>, (value) => value as int),
+          json['values'] as List<dynamic>, (value) => (value as num).toInt()),
     );
 
-Map<String, dynamic> _$$_NumbersToJson(_$_Numbers instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$NumbersToJson(_Numbers instance) => <String, dynamic>{
       'values': instance.values,
     };

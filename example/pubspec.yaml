@@ -1,8 +1,9 @@
-name: freezed_collection
+name: freezed_collection_example
 description: Extending dart:freezed to deep copyWith for collection.
 version: 1.0.0
 homepage: https://github.com/PROGrand/freezed_collection
 repository: https://github.com/PROGrand/freezed_collection
+publish_to: none
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -10,10 +11,11 @@ environment:
 dependencies:
   freezed_annotation: ^3.0.0
   json_annotation: ^4.9.0
+  freezed_collection:
+    path: ..
 
 dev_dependencies:
   build_runner: ^2.4.15
   freezed: ^3.0.6
   json_serializable: ^6.9.5
   lints: ^6.0.0
-  test: ^1.26.2

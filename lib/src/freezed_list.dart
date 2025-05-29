@@ -1,23 +1,27 @@
-import 'dart:math';
+import 'dart:math' show Random;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:freezed_collection/src/copy_on_write_list.dart';
 
-part 'freezed_list.freezed.dart';
+// part 'freezed_list.freezed.dart';
 
 @Freezed(
     genericArgumentFactories: true,
     toJson: false,
     fromJson: false,
-    copyWith: false,
-    map: FreezedMapOptions.none)
+    copyWith: true)
 class FreezedList<T> with _$FreezedList<T> implements Iterable<T> {
-  const FreezedList._();
+  // const FreezedList._();
 
-  factory FreezedList([Iterable iterable = const []]) =>
-      FreezedList<T>.of(List<T>.from(iterable, growable: false));
+  const FreezedList([this.list = const []]);
 
-  const factory FreezedList.of(List<T> list) = _FreezedList<T>;
+  @override
+  final List<T> list;
+
+  // factory FreezedList([Iterable iterable = const []]) =>
+  //     FreezedList<T>.of(List<T>.from(iterable, growable: false));
+
+  // const factory FreezedList.of(List<T> list) = _FreezedList<T>;
 
   @override
   String toString() => list.toString();
@@ -36,7 +40,7 @@ class FreezedList<T> with _$FreezedList<T> implements Iterable<T> {
 
   /// As [List.+].
   FreezedList<T> operator +(FreezedList<T> other) =>
-      _FreezedList<T>(list + other.list);
+      FreezedList<T>(list + other.list);
 
   /// As [List.length].
   @override
@@ -61,7 +65,7 @@ class FreezedList<T> with _$FreezedList<T> implements Iterable<T> {
 
   /// As [List.sublist] but returns a `FreezedList<T>`.
   FreezedList<T> sublist(int start, [int? end]) =>
-      _FreezedList<T>(list.sublist(start, end));
+      FreezedList<T>(list.sublist(start, end));
 
   /// As [List.getRange].
   Iterable<T> getRange(int start, int end) => list.getRange(start, end);
@@ -178,169 +182,331 @@ class FreezedList<T> with _$FreezedList<T> implements Iterable<T> {
       FreezedList(json.map(fromJsonT).toList());
 
   List<dynamic> toJson() => list.map((e) => e).toList();
-
-  @JsonKey(ignore: true)
-  $FreezedListCopyWith<T, FreezedList<T>> get copyWith =>
-      $FreezedListCopyWith<T, FreezedList<T>>(this, _$identity);
 }
 
-class $FreezedListCopyWith<T, $Res> {
-  final FreezedList<T> __value;
-  final $Res Function(FreezedList<T>) __then;
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
 
-  $FreezedListCopyWith(this.__value, this.__then);
+// dart format off
+T _$identity<T>(T value) => value;
 
-  FreezedList<T> get _value => __value;
+/// @nodoc
+mixin _$FreezedList<T> {
+  List<T> get list;
 
-  $Res call([Object? list = freezed]) {
-    return __then(
-        FreezedList<T>(list == freezed ? _value.list : list as List<T>));
+  /// Create a copy of FreezedList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $FreezedListCopyWith<T, FreezedList<T>> get copyWith =>
+      _$FreezedListCopyWithImpl<T, FreezedList<T>>(
+          this as FreezedList<T>, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is FreezedList<T> &&
+            const DeepCollectionEquality().equals(other.list, list));
   }
 
-  /// Replace element according to what() with newElement.
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(list));
+}
+
+/// @nodoc
+abstract mixin class $FreezedListCopyWith<T, $Res> {
+  factory $FreezedListCopyWith(
+          FreezedList<T> value, $Res Function(FreezedList<T>) then) =
+      _$FreezedListCopyWithImpl;
+
+  @useResult
+  $Res call({Object? list});
+
+  @useResult
+  $Res replaceFirstWhere(T newElement, bool Function(T element) test);
+
+  @useResult
+  $Res removeFirstWhere(bool Function(T element) test);
+
+  @useResult
+  $Res set(int index, T element);
+
+  @useResult
+  $Res add(T value);
+
+  @useResult
+  $Res addAll(Iterable<T> iterable);
+
+  @useResult
+  $Res clear();
+
+  @useResult
+  $Res fillRange(int start, int end, [T? fillValue]);
+
+  @useResult
+  $Res setFirst(T value);
+
+  @useResult
+  $Res insert(int index, T element);
+
+  @useResult
+  $Res insertAll(int index, Iterable<T> iterable);
+
+  @useResult
+  $Res setLast(T value);
+
+  @useResult
+  $Res setLength(int newLength);
+
+  @useResult
+  $Res remove(Object? value);
+
+  @useResult
+  $Res removeAt(int index);
+
+  @useResult
+  $Res removeLast();
+
+  @useResult
+  $Res removeRange(int start, int end);
+
+  @useResult
+  $Res removeWhere(bool Function(T element) test);
+
+  @useResult
+  $Res replaceRange(int start, int end, Iterable<T> replacements);
+
+  @useResult
+  $Res retainWhere(bool Function(T element) test);
+
+  @useResult
+  $Res setAll(int index, Iterable<T> iterable);
+
+  @useResult
+  $Res setRange(int start, int end, Iterable<T> iterable, [int skipCount = 0]);
+
+  @useResult
+  $Res shuffle([Random? random]);
+
+  @useResult
+  $Res sort([int Function(T a, T b)? compare]);
+}
+
+/// @nodoc
+class _$FreezedListCopyWithImpl<T, $Res>
+    implements $FreezedListCopyWith<T, $Res> {
+  _$FreezedListCopyWithImpl(this._self, this._then);
+
+  final FreezedList<T> _self;
+  final $Res Function(FreezedList<T>) _then;
+
+  /// Create a copy of FreezedList
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? list,
+  }) {
+    return _then(FreezedList(
+      null == list
+          ? _self.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as List<T>,
+    ));
+  }
+
+  @pragma('vm:prefer-inline')
+  @override
   $Res replaceFirstWhere(T newElement, bool Function(T element) test) {
-    final index = _value.list.indexWhere((element) => test(element));
+    final index = _self.list.indexWhere((element) => test(element));
     if (-1 != index) {
-      var newList = _value.list.toList();
+      var newList = _self.list.toList();
       newList[index] = newElement;
-      return __then(FreezedList<T>(newList));
+      return _then(FreezedList<T>(newList));
     } else {
-      return __then(FreezedList<T>(_value.list));
+      return _then(FreezedList<T>(_self.list));
     }
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res removeFirstWhere(bool Function(T element) test) {
-    final index = _value.list.indexWhere((element) => test(element));
+    final index = _self.list.indexWhere((element) => test(element));
     if (-1 != index) {
-      var newList = _value.list.toList();
+      var newList = _self.list.toList();
       newList.removeAt(index);
-      return __then(FreezedList<T>(newList));
+      return _then(FreezedList<T>(newList));
     } else {
-      return __then(FreezedList<T>(_value.list));
+      return _then(FreezedList<T>(_self.list));
     }
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res set(int index, T element) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList[index] = element;
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res add(T value) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.add(value);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res addAll(Iterable<T> iterable) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.addAll(iterable);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res clear() {
-    return __then(FreezedList<T>([]));
+    return _then(FreezedList<T>([]));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res fillRange(int start, int end, [T? fillValue]) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.fillRange(start, end, fillValue);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res setFirst(T value) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.first = value;
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res insert(int index, T element) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.insert(index, element);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res insertAll(int index, Iterable<T> iterable) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.insertAll(index, iterable);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res setLast(T value) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.last = value;
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res setLength(int newLength) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.length = newLength;
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res remove(Object? value) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.remove(value);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res removeAt(int index) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.removeAt(index);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res removeLast() {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.removeLast();
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res removeRange(int start, int end) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.removeRange(start, end);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res removeWhere(bool Function(T element) test) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.removeWhere(test);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res replaceRange(int start, int end, Iterable<T> replacements) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.replaceRange(start, end, replacements);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res retainWhere(bool Function(T element) test) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.retainWhere(test);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res setAll(int index, Iterable<T> iterable) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.setAll(index, iterable);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res setRange(int start, int end, Iterable<T> iterable, [int skipCount = 0]) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.setRange(start, end, iterable, skipCount);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res shuffle([Random? random]) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.shuffle(random);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 
+  @pragma('vm:prefer-inline')
+  @override
   $Res sort([int Function(T a, T b)? compare]) {
-    var newList = _value.list.toList();
+    var newList = _self.list.toList();
     newList.sort(compare);
-    return __then(FreezedList<T>(newList));
+    return _then(FreezedList<T>(newList));
   }
 }

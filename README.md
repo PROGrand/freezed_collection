@@ -4,9 +4,10 @@ Extending dart freezed with deep collection copyWith.
 
 - [x] `FreezedList<T>.fromJson`
 - [x] `FreezedList<T>.copyWith.replaceFirst(T newElement, bool Function(T element) what)`
- 
+
 ## Example
 
+[//]: # ( @formatter:off)
 ```dart
 @freezed
 class One with _$One {
@@ -29,25 +30,24 @@ class Three with _$Three {
   factory Three.fromJson(Map<String, dynamic> json) => _$ThreeFromJson(json);
 }
 
-void test() {
-  final var1 = One('1', Two('2', FreezedList([Three('31'), Three('32'), Three('33')])));
-  final var2 = One('1', Two('2', FreezedList([Three('31'), Three('32'), Three('33')])));
-  final var21 = var2.copyWith();
-  expect(var1, equals(var2));
-  expect(var1, equals(var21));
-  final var3 = var21.copyWith
-      .two(name: '21')
-      .copyWith
-      .two
-      .threes
-      .replaceFirst(Three('XXX'), (element) => element.name == '31');
-  expect(var3, isNot(var21));
-  final var4 = var3.copyWith
-      .two(name: '2')
-      .copyWith
-      .two
-      .threes
-      .replaceFirst(Three('31'), (element) => element.name == 'XXX');
-  expect(var4, equals(var21));
-}
+test('FreezedList have replaceFirstWhere', () {
+  final list = FreezedList(['1', '2', '3']);
+  final list2 = list.copyWith.replaceFirstWhere(
+    'newElement',
+    (element) => element == '1',
+  );
+
+  expect(list2, equals(['newElement', '2', '3']));
+});
+
+test('FreezedList has deep copyWith', () {
+  final one = One(
+      '1', Two('2', FreezedList([Three('31'), Three('32'), Three('31')])));
+
+  final abc =
+      one.copyWith.two.threes(list: [Three('a'), Three('b'), Three('c')]);
+
+  expect(abc.two.threes.map((p0) => p0.name), equals(['a', 'b', 'c']));
+});
 ```
+[//]: # ( @formatter:on)

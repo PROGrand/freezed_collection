@@ -1,6 +1,6 @@
-import 'package:freezed_collection/freezed_collection.dart';
-
 import 'dart:convert';
+
+import 'package:freezed_collection/freezed_collection.dart';
 
 import 'assistant.dart';
 import 'company.dart';
@@ -36,6 +36,6 @@ void main() {
   printT(newCompany);
   printT(newCompany2);
 
-  print('Is newCompany equal to company? ${newCompany == company}');
-  print('Is newCompany equal to company? ${newCompany2 == company}');
+  print('Is 1 equal to 2? ${newCompany == company}');
+  print('Is 1 equal to 3? ${newCompany2 == company}');
 }

@@ -1,3 +1,3 @@
-library freezed_collection;
+library;
 
 export 'src/freezed_list.dart';
