@@ -51,7 +51,8 @@ class CopyOnWriteList<E> implements List<E> {
       _list.firstWhere(test, orElse: orElse);
 
   @override
-  T fold<T>(T initialValue, T Function(T, E) combine) => _list.fold(initialValue, combine);
+  T fold<T>(T initialValue, T Function(T, E) combine) =>
+      _list.fold(initialValue, combine);
 
   @override
   Iterable<E> followedBy(Iterable<E> other) => _list.followedBy(other);
@@ -66,7 +67,8 @@ class CopyOnWriteList<E> implements List<E> {
   int indexOf(E element, [int start = 0]) => _list.indexOf(element, start);
 
   @override
-  int indexWhere(bool Function(E) test, [int start = 0]) => _list.indexWhere(test, start);
+  int indexWhere(bool Function(E) test, [int start = 0]) =>
+      _list.indexWhere(test, start);
 
   @override
   bool get isEmpty => _list.isEmpty;
@@ -87,7 +89,8 @@ class CopyOnWriteList<E> implements List<E> {
   int lastIndexOf(E element, [int? start]) => _list.lastIndexOf(element, start);
 
   @override
-  int lastIndexWhere(bool Function(E) test, [int? start]) => _list.lastIndexWhere(test, start);
+  int lastIndexWhere(bool Function(E) test, [int? start]) =>
+      _list.lastIndexWhere(test, start);
 
   @override
   E lastWhere(bool Function(E) test, {E Function()? orElse}) =>

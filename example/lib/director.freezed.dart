@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Director {
   String? get name;
-  FreezedList<Assistant> get assistants;
+  FreezedMap<int, Assistant> get assistants;
 
   /// Create a copy of Director
   /// with the given fields replaced by the non-null parameter values.
@@ -34,14 +34,13 @@ mixin _$Director {
         (other.runtimeType == runtimeType &&
             other is Director &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality()
-                .equals(other.assistants, assistants));
+            (identical(other.assistants, assistants) ||
+                other.assistants == assistants));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, name, const DeepCollectionEquality().hash(assistants));
+  int get hashCode => Object.hash(runtimeType, name, assistants);
 
   @override
   String toString() {
@@ -54,9 +53,9 @@ abstract mixin class $DirectorCopyWith<$Res> {
   factory $DirectorCopyWith(Director value, $Res Function(Director) _then) =
       _$DirectorCopyWithImpl;
   @useResult
-  $Res call({String? name, FreezedList<Assistant> assistants});
+  $Res call({String? name, FreezedMap<int, Assistant> assistants});
 
-  $FreezedListCopyWith<Assistant, $Res> get assistants;
+  $FreezedMapCopyWith<int, Assistant, $Res> get assistants;
 }
 
 /// @nodoc
@@ -82,7 +81,7 @@ class _$DirectorCopyWithImpl<$Res> implements $DirectorCopyWith<$Res> {
       assistants: null == assistants
           ? _self.assistants
           : assistants // ignore: cast_nullable_to_non_nullable
-              as FreezedList<Assistant>,
+              as FreezedMap<int, Assistant>,
     ));
   }
 
@@ -90,8 +89,8 @@ class _$DirectorCopyWithImpl<$Res> implements $DirectorCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<Assistant, $Res> get assistants {
-    return $FreezedListCopyWith<Assistant, $Res>(_self.assistants, (value) {
+  $FreezedMapCopyWith<int, Assistant, $Res> get assistants {
+    return $FreezedMapCopyWith<int, Assistant, $Res>(_self.assistants, (value) {
       return _then(_self.copyWith(assistants: value));
     });
   }
@@ -107,7 +106,7 @@ class _Director implements Director {
   @override
   final String? name;
   @override
-  final FreezedList<Assistant> assistants;
+  final FreezedMap<int, Assistant> assistants;
 
   /// Create a copy of Director
   /// with the given fields replaced by the non-null parameter values.
@@ -130,14 +129,13 @@ class _Director implements Director {
         (other.runtimeType == runtimeType &&
             other is _Director &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality()
-                .equals(other.assistants, assistants));
+            (identical(other.assistants, assistants) ||
+                other.assistants == assistants));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, name, const DeepCollectionEquality().hash(assistants));
+  int get hashCode => Object.hash(runtimeType, name, assistants);
 
   @override
   String toString() {
@@ -152,10 +150,10 @@ abstract mixin class _$DirectorCopyWith<$Res>
       __$DirectorCopyWithImpl;
   @override
   @useResult
-  $Res call({String? name, FreezedList<Assistant> assistants});
+  $Res call({String? name, FreezedMap<int, Assistant> assistants});
 
   @override
-  $FreezedListCopyWith<Assistant, $Res> get assistants;
+  $FreezedMapCopyWith<int, Assistant, $Res> get assistants;
 }
 
 /// @nodoc
@@ -181,7 +179,7 @@ class __$DirectorCopyWithImpl<$Res> implements _$DirectorCopyWith<$Res> {
       assistants: null == assistants
           ? _self.assistants
           : assistants // ignore: cast_nullable_to_non_nullable
-              as FreezedList<Assistant>,
+              as FreezedMap<int, Assistant>,
     ));
   }
 
@@ -189,8 +187,8 @@ class __$DirectorCopyWithImpl<$Res> implements _$DirectorCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<Assistant, $Res> get assistants {
-    return $FreezedListCopyWith<Assistant, $Res>(_self.assistants, (value) {
+  $FreezedMapCopyWith<int, Assistant, $Res> get assistants {
+    return $FreezedMapCopyWith<int, Assistant, $Res>(_self.assistants, (value) {
       return _then(_self.copyWith(assistants: value));
     });
   }

@@ -1,53 +1,69 @@
-Extending dart freezed with deep collection copyWith.
+# Freezed Collection
 
-## Features
+Extending dart `Freezed` collection with deep `copyWith`.
 
-- [x] `FreezedList<T>.fromJson`
-- [x] `FreezedList<T>.copyWith.replaceFirst(T newElement, bool Function(T element) what)`
+## Install
 
-## Example
+```yaml
+dependencies:
+  freezed_collection: ^2.0.0-pre1
+```
+
+## Status
+
+[FreezedMap](lib/src/freezed_map.dart) can be used.
+
+`FreezedList` and `FreezedSet` are coming soon.
+
+## copyWith
 
 [//]: # ( @formatter:off)
 ```dart
 @freezed
-class One with _$One {
+abstract class One with _$One {
   const factory One(String name, Two two) = _One;
 
   factory One.fromJson(Map<String, dynamic> json) => _$OneFromJson(json);
 }
 
 @freezed
-class Two with _$Two {
-  const factory Two(String name, FreezedList<Three> threes) = _Two;
+abstract class Two with _$Two {
+  const factory Two(int index, FreezedMap<String, int> three) = _Two;
 
   factory Two.fromJson(Map<String, dynamic> json) => _$TwoFromJson(json);
 }
 
-@freezed
-class Three with _$Three {
-  const factory Three(String name) = _Three;
+final one = One('a', Two(1, FreezedMap({'1': 2, '3': 4})));
+final two = one.copyWith.two.three.addAll({'5': 6, '7': 8}).seal();
 
-  factory Three.fromJson(Map<String, dynamic> json) => _$ThreeFromJson(json);
-}
-
-test('FreezedList have replaceFirstWhere', () {
-  final list = FreezedList(['1', '2', '3']);
-  final list2 = list.copyWith.replaceFirstWhere(
-    'newElement',
-    (element) => element == '1',
-  );
-
-  expect(list2, equals(['newElement', '2', '3']));
-});
-
-test('FreezedList has deep copyWith', () {
-  final one = One(
-      '1', Two('2', FreezedList([Three('31'), Three('32'), Three('31')])));
-
-  final abc =
-      one.copyWith.two.threes(list: [Three('a'), Three('b'), Three('c')]);
-
-  expect(abc.two.threes.map((p0) => p0.name), equals(['a', 'b', 'c']));
-});
+final json = jsonEncode(two.toJson());
+final dec = One.fromJson(jsonDecode(json));
+expect(dec.two.three.toMap(), equals({'1': 2, '3': 4, '5': 6, '7': 8}));
+final dec2 = One.fromJson(jsonDecode(
+  '{"name":"a","two":{"index":1,"three":{"1":2,"3":4,"5":6,"7":8}}}'));
+expect(dec2.two.three.toMap(), equals({'1': 2, '3': 4, '5': 6, '7': 8}));
 ```
 [//]: # ( @formatter:on)
+
+## Sealing
+
+`copyWith` returns mutable builder with methods mapped to corresponding collection interface.
+
+`seal()` method should be used to build freezed collection.
+
+## Chaining
+
+[//]: # ( @formatter:off)
+```dart
+final map = FreezedMap({'1': 1});
+final map2 = map.copyWith(map: {'2': 2, '3': 3}).updateAllValues((k, p0) => p0 + 1).removeWhere((k, v) => 2 == v).seal();
+```
+[//]: # ( @formatter:on)
+
+- [x] `FreezedList<T>.fromJson`
+- [x] `FreezedList<T>.copyWith.replaceFirst(T newElement, bool Function(T element) what)`
+
+## Json
+
+If `FreezedMap<K,V>` has non-standard (non-string) key, it will be encoded using `json.encode` and decoded using
+`json.decode`. This leads to some performance leakage. So use `String` for keys if you plan to serialize.

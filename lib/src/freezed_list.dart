@@ -319,7 +319,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   $Res replaceFirstWhere(T newElement, bool Function(T element) test) {
     final index = _self.list.indexWhere((element) => test(element));
     if (-1 != index) {
-      var newList = _self.list.toList();
+      final newList = _self.list.toList();
       newList[index] = newElement;
       return _then(FreezedList<T>(newList));
     } else {
@@ -332,7 +332,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   $Res removeFirstWhere(bool Function(T element) test) {
     final index = _self.list.indexWhere((element) => test(element));
     if (-1 != index) {
-      var newList = _self.list.toList();
+      final newList = _self.list.toList();
       newList.removeAt(index);
       return _then(FreezedList<T>(newList));
     } else {
@@ -343,7 +343,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res set(int index, T element) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList[index] = element;
     return _then(FreezedList<T>(newList));
   }
@@ -351,7 +351,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res add(T value) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.add(value);
     return _then(FreezedList<T>(newList));
   }
@@ -359,7 +359,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res addAll(Iterable<T> iterable) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.addAll(iterable);
     return _then(FreezedList<T>(newList));
   }
@@ -373,7 +373,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res fillRange(int start, int end, [T? fillValue]) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.fillRange(start, end, fillValue);
     return _then(FreezedList<T>(newList));
   }
@@ -381,7 +381,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res setFirst(T value) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.first = value;
     return _then(FreezedList<T>(newList));
   }
@@ -389,7 +389,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res insert(int index, T element) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.insert(index, element);
     return _then(FreezedList<T>(newList));
   }
@@ -397,7 +397,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res insertAll(int index, Iterable<T> iterable) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.insertAll(index, iterable);
     return _then(FreezedList<T>(newList));
   }
@@ -405,7 +405,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res setLast(T value) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.last = value;
     return _then(FreezedList<T>(newList));
   }
@@ -413,7 +413,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res setLength(int newLength) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.length = newLength;
     return _then(FreezedList<T>(newList));
   }
@@ -421,7 +421,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res remove(Object? value) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.remove(value);
     return _then(FreezedList<T>(newList));
   }
@@ -429,7 +429,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res removeAt(int index) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.removeAt(index);
     return _then(FreezedList<T>(newList));
   }
@@ -437,7 +437,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res removeLast() {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.removeLast();
     return _then(FreezedList<T>(newList));
   }
@@ -445,7 +445,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res removeRange(int start, int end) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.removeRange(start, end);
     return _then(FreezedList<T>(newList));
   }
@@ -453,7 +453,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res removeWhere(bool Function(T element) test) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.removeWhere(test);
     return _then(FreezedList<T>(newList));
   }
@@ -461,7 +461,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res replaceRange(int start, int end, Iterable<T> replacements) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.replaceRange(start, end, replacements);
     return _then(FreezedList<T>(newList));
   }
@@ -469,7 +469,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res retainWhere(bool Function(T element) test) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.retainWhere(test);
     return _then(FreezedList<T>(newList));
   }
@@ -477,7 +477,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res setAll(int index, Iterable<T> iterable) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.setAll(index, iterable);
     return _then(FreezedList<T>(newList));
   }
@@ -485,7 +485,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res setRange(int start, int end, Iterable<T> iterable, [int skipCount = 0]) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.setRange(start, end, iterable, skipCount);
     return _then(FreezedList<T>(newList));
   }
@@ -493,7 +493,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res shuffle([Random? random]) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.shuffle(random);
     return _then(FreezedList<T>(newList));
   }
@@ -501,7 +501,7 @@ class _$FreezedListCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res sort([int Function(T a, T b)? compare]) {
-    var newList = _self.list.toList();
+    final newList = _self.list.toList();
     newList.sort(compare);
     return _then(FreezedList<T>(newList));
   }

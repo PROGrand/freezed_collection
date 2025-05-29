@@ -1,3 +1,7 @@
+## 2.0.0-pre1
+
+- FreezedMap added
+
 ## 1.0.0
 
 - ported to freezed: 3.0.6

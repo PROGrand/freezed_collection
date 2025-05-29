@@ -135,18 +135,18 @@ void main() {
           (element) => element.numbers[0].values[0] == 1);
 
       var n = 0;
-      for (var v in var1) {
-        for (var w in v.numbers) {
-          for (var x in w.values) {
+      for (final v in var1) {
+        for (final w in v.numbers) {
+          for (final x in w.values) {
             n += x;
           }
         }
       }
 
       var m = 0;
-      for (var v in var2) {
-        for (var w in v.numbers) {
-          for (var x in w.values) {
+      for (final v in var2) {
+        for (final w in v.numbers) {
+          for (final x in w.values) {
             m += x;
           }
         }

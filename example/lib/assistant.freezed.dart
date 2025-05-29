@@ -15,8 +15,8 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Assistant {
-  String? get name;
-  int? get age;
+  String get name;
+  int get age;
 
   /// Create a copy of Assistant
   /// with the given fields replaced by the non-null parameter values.
@@ -52,7 +52,7 @@ abstract mixin class $AssistantCopyWith<$Res> {
   factory $AssistantCopyWith(Assistant value, $Res Function(Assistant) _then) =
       _$AssistantCopyWithImpl;
   @useResult
-  $Res call({String? name, int? age});
+  $Res call({String name, int age});
 }
 
 /// @nodoc
@@ -67,18 +67,18 @@ class _$AssistantCopyWithImpl<$Res> implements $AssistantCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? age = freezed,
+    Object? name = null,
+    Object? age = null,
   }) {
     return _then(_self.copyWith(
-      name: freezed == name
+      name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      age: freezed == age
+              as String,
+      age: null == age
           ? _self.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ));
   }
 }
@@ -86,13 +86,14 @@ class _$AssistantCopyWithImpl<$Res> implements $AssistantCopyWith<$Res> {
 /// @nodoc
 @JsonSerializable()
 class _Assistant implements Assistant {
-  _Assistant({this.name, this.age});
-  factory _Assistant.fromJson(Map<String, dynamic> json) => _$AssistantFromJson(json);
+  _Assistant({required this.name, required this.age});
+  factory _Assistant.fromJson(Map<String, dynamic> json) =>
+      _$AssistantFromJson(json);
 
   @override
-  final String? name;
+  final String name;
   @override
-  final int? age;
+  final int age;
 
   /// Create a copy of Assistant
   /// with the given fields replaced by the non-null parameter values.
@@ -129,12 +130,14 @@ class _Assistant implements Assistant {
 }
 
 /// @nodoc
-abstract mixin class _$AssistantCopyWith<$Res> implements $AssistantCopyWith<$Res> {
-  factory _$AssistantCopyWith(_Assistant value, $Res Function(_Assistant) _then) =
+abstract mixin class _$AssistantCopyWith<$Res>
+    implements $AssistantCopyWith<$Res> {
+  factory _$AssistantCopyWith(
+          _Assistant value, $Res Function(_Assistant) _then) =
       __$AssistantCopyWithImpl;
   @override
   @useResult
-  $Res call({String? name, int? age});
+  $Res call({String name, int age});
 }
 
 /// @nodoc
@@ -149,18 +152,18 @@ class __$AssistantCopyWithImpl<$Res> implements _$AssistantCopyWith<$Res> {
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? name = freezed,
-    Object? age = freezed,
+    Object? name = null,
+    Object? age = null,
   }) {
     return _then(_Assistant(
-      name: freezed == name
+      name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      age: freezed == age
+              as String,
+      age: null == age
           ? _self.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ));
   }
 }

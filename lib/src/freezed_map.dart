@@ -1,5 +1,7 @@
 // ignore_for_file: override_on_non_overriding_member
 
+import 'dart:convert' show json;
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:freezed_collection/src/internal/copy_on_write_map.dart'
     show CopyOnWriteMap;
@@ -38,8 +40,9 @@ abstract class FreezedMap<K, V> with _$FreezedMap {
   }
 
   /// Instantiates with elements from a [Map].
-  factory FreezedMap.from(Map map) {
-    return _FreezedMap<K, V>.copyAndCheckTypes(map.keys, (k) => map[k]);
+  factory FreezedMap.from(Map map, V Function(Object?) fromJsonV) {
+    return _FreezedMap<K, V>.copyAndCheckTypes(
+        map.keys, (k) => fromJsonV(map[k]));
   }
 
   /// Instantiates with elements from a [Map<K, V>].
@@ -88,7 +91,7 @@ abstract class FreezedMap<K, V> with _$FreezedMap {
     if (other is! FreezedMap) return false;
     if (other.length != length) return false;
     if (other.hashCode != hashCode) return false;
-    for (var key in keys) {
+    for (final key in keys) {
       if (other[key] != this[key]) return false;
     }
     return true;
@@ -145,11 +148,16 @@ abstract class FreezedMap<K, V> with _$FreezedMap {
   FreezedMap<K2, V2> map<K2, V2>(MapEntry<K2, V2> Function(K, V) f) =>
       _FreezedMap<K2, V2>.withSafeMap(null, _map.map(f));
 
-  factory FreezedMap.fromJson(Map<String, dynamic> json) =>
-      FreezedMap<K, V>.from(json);
+  factory FreezedMap.fromJson(
+          Map<String, dynamic> json, V Function(Object?) fromJsonV) =>
+      FreezedMap<K, V>.from(json, fromJsonV);
 
-  Map<String, dynamic> toJson() =>
-      Map.fromEntries(entries.map((e) => MapEntry(e.key.toString(), e.value)));
+  Map<String, dynamic> toJson() => Map.fromEntries(entries.map((e) => MapEntry(
+      switch (e.key) {
+        String s => s,
+        _ => json.encode(e.key).toString(),
+      },
+      e.value)));
 
   // Internal.
 
@@ -191,29 +199,31 @@ class _FreezedMap<K, V> extends FreezedMap<K, V> {
 
   _FreezedMap.copyAndCheckTypes(Iterable keys, Function lookup)
       : super._(null, <K, V>{}) {
-    for (var key in keys) {
-      if (key is K) {
-        var value = lookup(key);
-        if (value is V) {
-          _map[key] = value;
-        } else {
-          throw ArgumentError('map contained invalid value: $value');
-        }
+    for (final key in keys) {
+      final decoded = switch (key) {
+        K k => k,
+        String s => json.decode(s) as K,
+        _ => throw ArgumentError('map contained invalid key: $key')
+      };
+
+      final value = lookup(key);
+      if (value is V) {
+        _map[decoded] = value;
       } else {
-        throw ArgumentError('map contained invalid key: $key');
+        throw ArgumentError('map contained invalid value: $value');
       }
     }
   }
 
   _FreezedMap.copyAndCheckForNull(Iterable<K> keys, V Function(K) lookup)
       : super._(null, <K, V>{}) {
-    var checkKeys = !isSoundMode && null is! K;
-    var checkValues = !isSoundMode && null is! V;
-    for (var key in keys) {
+    final checkKeys = !isSoundMode && null is! K;
+    final checkValues = !isSoundMode && null is! V;
+    for (final key in keys) {
       if (checkKeys && identical(key, null)) {
         throw ArgumentError('map contained invalid key: null');
       }
-      var value = lookup(key);
+      final value = lookup(key);
       if (checkValues && value == null) {
         throw ArgumentError('map contained invalid value: null');
       }
@@ -223,47 +233,6 @@ class _FreezedMap<K, V> extends FreezedMap<K, V> {
 
   bool hasExactKeyAndValueTypes(Type key, Type value) => K == key && V == value;
 }
-
-// /// @nodoc
-// abstract mixin class $FreezedMapCopyWith<K, V, $Res> {
-//   factory $FreezedMapCopyWith(
-//           FreezedMap<K, V> value /*, $Res Function(FreezedMap<K, V>) then*/) =
-//       $FreezedMapCopyWith;
-//
-//   @useResult
-//   FreezedMap<K, V> seal();
-//
-//   $FreezedMapCopyWith<K, V, $Res> call({Map<K, V> map});
-//
-//   $FreezedMapCopyWith<K, V, $Res> replace(Object? map);
-//
-//   $FreezedMapCopyWith<K, V, $Res> withBase(_MapFactory<K, V> base);
-//
-//   $FreezedMapCopyWith<K, V, $Res> withDefaultBase();
-//
-//   $FreezedMapCopyWith<K, V, $Res> addIterable<T>(Iterable<T> iterable,
-//       {K Function(T)? key, V Function(T)? value});
-//
-//   operator []=(K key, V value);
-//
-//   $FreezedMapCopyWith<K, V, $Res> putIfAbsent(K key, V Function() ifAbsent);
-//
-//   $FreezedMapCopyWith<K, V, $Res> addAll(Map<K, V> other);
-//
-//   $FreezedMapCopyWith<K, V, $Res> remove(Object? key);
-//
-//   $FreezedMapCopyWith<K, V, $Res> removeWhere(bool Function(K, V) predicate);
-//
-//   $FreezedMapCopyWith<K, V, $Res> clear();
-//
-//   $FreezedMapCopyWith<K, V, $Res> addEntries(
-//       Iterable<MapEntry<K, V>> newEntries);
-//
-//   $FreezedMapCopyWith<K, V, $Res> updateValue(K key, V Function(V) update,
-//       {V Function()? ifAbsent});
-//
-//   $FreezedMapCopyWith<K, V, $Res> updateAllValues(V Function(K, V) update);
-// }
 
 /// @nodoc
 class $FreezedMapCopyWith<K, V, $Res> {
@@ -317,13 +286,13 @@ class $FreezedMapCopyWith<K, V, $Res> {
     if (map is _FreezedMap<K, V> && map._mapFactory == _mapFactory) {
       _setOwner(map);
     } else if (map is FreezedMap) {
-      var replacement = _createMap();
+      final replacement = _createMap();
       map.forEach((dynamic key, dynamic value) {
         replacement[key as K] = value as V;
       });
       _setSafeMap(replacement);
     } else if (map is Map) {
-      var replacement = _createMap();
+      final replacement = _createMap();
       map.forEach((dynamic key, dynamic value) {
         replacement[key as K] = value as V;
       });
@@ -379,7 +348,7 @@ class $FreezedMapCopyWith<K, V, $Res> {
       {K Function(T)? key, V Function(T)? value}) {
     key ??= (T x) => x as K;
     value ??= (T x) => x as V;
-    for (var element in iterable) {
+    for (final element in iterable) {
       this[key(element)] = value(element);
     }
 
@@ -411,7 +380,7 @@ class $FreezedMapCopyWith<K, V, $Res> {
   $FreezedMapCopyWith<K, V, $Res> putIfAbsent(K key, V Function() ifAbsent) {
     _checkKey(key);
     _safeMap.putIfAbsent(key, () {
-      var value = ifAbsent();
+      final value = ifAbsent();
       _checkValue(value);
       return value;
     });
@@ -516,7 +485,7 @@ class $FreezedMapCopyWith<K, V, $Res> {
   void _checkKeys(Iterable<K> keys) {
     if (isSoundMode) return;
     if (null is K) return;
-    for (var key in keys) {
+    for (final key in keys) {
       _checkKey(key);
     }
   }
@@ -532,7 +501,7 @@ class $FreezedMapCopyWith<K, V, $Res> {
   void _checkValues(Iterable<V> values) {
     if (isSoundMode) return;
     if (null is V) return;
-    for (var value in values) {
+    for (final value in values) {
       _checkValue(value);
     }
   }
