@@ -2,7 +2,7 @@
 
 // ignore_for_file: type=lint
 
-part of 'freezed_collection_test.dart';
+part of 'freezed_list_test.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
