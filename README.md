@@ -6,14 +6,14 @@ Extending dart `Freezed` collection with deep `copyWith`.
 
 ```yaml
 dependencies:
-  freezed_collection: ^2.0.0-pre1
+  freezed_collection: ^2.1.1-pre1
 ```
 
 ## Status
 
-[FreezedMap](lib/src/freezed_map.dart) can be used.
+[FreezedMap](lib/src/freezed_map.dart) and [FreezedList](lib/src/freezed_list.dart) can be used.
 
-`FreezedList` and `FreezedSet` are coming soon.
+`FreezedSet` is coming soon.
 
 ## copyWith
 

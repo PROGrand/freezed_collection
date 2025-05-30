@@ -1,3 +1,7 @@
+## 2.1.1-pre1
+
+- FreezedList added
+
 ## 2.1.0-pre1
 
 - Removed no-sound checking, sound expected always  (dart 3.0+).
