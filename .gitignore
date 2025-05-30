@@ -11,4 +11,5 @@ pubspec.lock
 *.iml
 /coverage/
 .idea
+.idea/
 *.vm.json
