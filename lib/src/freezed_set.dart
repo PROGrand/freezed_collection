@@ -286,12 +286,6 @@ class $FreezedSetCopyWith<E, $Res> {
     return $FreezedSetCopyWith<E, $Res>._uninitialized(then)..replace(iterable);
   }
 
-  // factory $FreezedSetCopyWith.of(
-  //     Iterable<E> iterable, $Res Function(Iterable<E> then) then) {
-  //   return $FreezedSetCopyWith<E, $Res>._uninitialized(then)
-  //     .._replaceOf(iterable);
-  // }
-
   final $Res Function(FreezedSet<E>) _then;
 
   /// Used by [_createSet] to instantiate [_set]. The default value is `null`.
@@ -324,6 +318,7 @@ class $FreezedSetCopyWith<E, $Res> {
   }
 
   /// Replaces all elements with elements from an [Iterable].
+  /// Preserves base, if applicable.
   @pragma('vm:prefer-inline')
   $FreezedSetCopyWith<E, $Res> replace(Iterable iterable) {
     if (iterable is _FreezedSet<E> && iterable.setFactory == _setFactory) {
@@ -345,21 +340,6 @@ class $FreezedSetCopyWith<E, $Res> {
 
     return this;
   }
-
-  // /// Replaces all elements with elements from an [Iterable<E>].
-  // @pragma('vm:prefer-inline')
-  // $FreezedSetCopyWith<E, $Res> _replaceOf(Iterable<E> iterable) {
-  //   if (iterable is _FreezedSet<E> && iterable.setFactory == _setFactory) {
-  //     _withOwner(iterable);
-  //   } else {
-  //     if (iterable is _FreezedSet<E>) {
-  //       _setFactory = iterable.__setFactory;
-  //     }
-  //     _setSafeSet(_createSet()..addAll(iterable));
-  //   }
-  //
-  //   return this;
-  // }
 
   /// Uses `base` as the collection type for all sets created by this builder.
   ///
@@ -461,7 +441,7 @@ class $FreezedSetCopyWith<E, $Res> {
 
   // Based on Iterable.
 
-  /// As [Iterable.map], but updates the builder in place. Returns nothing.
+  /// As [Iterable.map], but updates the builder in place. Returns itself.
   @pragma('vm:prefer-inline')
   $FreezedSetCopyWith<E, $Res> map(E Function(E) f) {
     final result = _createSet()..addAll(_set.map(f));
@@ -469,14 +449,14 @@ class $FreezedSetCopyWith<E, $Res> {
     return this;
   }
 
-  /// As [Iterable.where], but updates the builder in place. Returns nothing.
+  /// As [Iterable.where], but updates the builder in place. Returns itself.
   ///
   /// This method is an alias of [retainWhere].
   @pragma('vm:prefer-inline')
   $FreezedSetCopyWith<E, $Res> where(bool Function(E) test) =>
       retainWhere(test);
 
-  /// As [Iterable.expand], but updates the builder in place. Returns nothing.
+  /// As [Iterable.expand], but updates the builder in place. Returns itself.
   @pragma('vm:prefer-inline')
   $FreezedSetCopyWith<E, $Res> expand(Iterable<E> Function(E) f) {
     final result = _createSet()..addAll(_set.expand(f));
@@ -484,30 +464,28 @@ class $FreezedSetCopyWith<E, $Res> {
     return this;
   }
 
-  /// As [Iterable.take], but updates the builder in place. Returns nothing.
+  /// As [Iterable.take], but updates the builder in place. Returns itself.
   @pragma('vm:prefer-inline')
   $FreezedSetCopyWith<E, $Res> take(int n) {
     _setSafeSet(_createSet()..addAll(_set.take(n)));
     return this;
   }
 
-  /// As [Iterable.takeWhile], but updates the builder in place. Returns
-  /// nothing.
+  /// As [Iterable.takeWhile], but updates the builder in place. Returns itself.
   @pragma('vm:prefer-inline')
   $FreezedSetCopyWith<E, $Res> takeWhile(bool Function(E) test) {
     _setSafeSet(_createSet()..addAll(_set.takeWhile(test)));
     return this;
   }
 
-  /// As [Iterable.skip], but updates the builder in place. Returns nothing.
+  /// As [Iterable.skip], but updates the builder in place. Returns itself.
   @pragma('vm:prefer-inline')
   $FreezedSetCopyWith<E, $Res> skip(int n) {
     _setSafeSet(_createSet()..addAll(_set.skip(n)));
     return this;
   }
 
-  /// As [Iterable.skipWhile], but updates the builder in place. Returns
-  /// nothing.
+  /// As [Iterable.skipWhile], but updates the builder in place. Returns itself.
   @pragma('vm:prefer-inline')
   $FreezedSetCopyWith<E, $Res> skipWhile(bool Function(E) test) {
     _setSafeSet(_createSet()..addAll(_set.skipWhile(test)));

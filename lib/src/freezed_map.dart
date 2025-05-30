@@ -266,6 +266,7 @@ final class $FreezedMapCopyWith<K, V, $Res> {
   // }
 
   /// Replaces all elements with elements from a [Map] or [FreezedMap].
+  /// Preserves base, if applicable.
   @pragma('vm:prefer-inline')
   $FreezedMapCopyWith<K, V, $Res> replace(Object? map) {
     if (map is _FreezedMap<K, V> && map.mapFactory == _mapFactory) {
