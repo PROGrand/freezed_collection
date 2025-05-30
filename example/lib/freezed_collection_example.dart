@@ -48,8 +48,10 @@ void main() {
       printT(newCompany2);
 
       expect(company, equals(restoredCompany), reason: 'Is 1 equal to 2?');
-      expect(restoredCompany, isNot(equals(newCompany)), reason: 'Is 2 equal to 3?');
-      expect(newCompany, isNot(equals(newCompany2)), reason: 'Is 3 equal to 4?');
+      expect(restoredCompany, isNot(equals(newCompany)),
+          reason: 'Is 2 equal to 3?');
+      expect(newCompany, isNot(equals(newCompany2)),
+          reason: 'Is 3 equal to 4?');
     });
   });
 }
