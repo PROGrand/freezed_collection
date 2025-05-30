@@ -8,13 +8,19 @@
 import 'dart:convert' show json;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:freezed_collection/src/internal/copy_on_write_map.dart' show CopyOnWriteMap;
-import 'package:freezed_collection/src/internal/hash.dart' show hashObjects, hash2;
+import 'package:freezed_collection/src/internal/copy_on_write_map.dart'
+    show CopyOnWriteMap;
+import 'package:freezed_collection/src/internal/hash.dart'
+    show hashObjects, hash2;
 import 'package:freezed_collection/src/internal/null_safety.dart';
 
 typedef $MapFactory<K, V> = Map<K, V> Function();
 
-@Freezed(genericArgumentFactories: true, toJson: false, fromJson: false, copyWith: true)
+@Freezed(
+    genericArgumentFactories: true,
+    toJson: false,
+    fromJson: false,
+    copyWith: true)
 abstract class FreezedMap<K, V> with _$FreezedMap {
   final $MapFactory<K, V>? __mapFactory;
 
@@ -44,7 +50,8 @@ abstract class FreezedMap<K, V> with _$FreezedMap {
 
   /// Instantiates with elements from a [Map].
   factory FreezedMap.from(Map map, V Function(Object?) fromJsonV) {
-    return _FreezedMap<K, V>.copyAndCheckTypes(map.keys, (k) => fromJsonV(map[k]));
+    return _FreezedMap<K, V>.copyAndCheckTypes(
+        map.keys, (k) => fromJsonV(map[k]));
   }
 
   /// Instantiates with elements from a [Map<K, V>].
@@ -154,7 +161,8 @@ abstract class FreezedMap<K, V> with _$FreezedMap {
   FreezedMap<K2, V2> map<K2, V2>(MapEntry<K2, V2> Function(K, V) f) =>
       _FreezedMap<K2, V2>.withSafeMap(null, __map.map(f));
 
-  factory FreezedMap.fromJson(Map<String, dynamic> json, V Function(Object?) fromJsonV) =>
+  factory FreezedMap.fromJson(
+          Map<String, dynamic> json, V Function(Object?) fromJsonV) =>
       FreezedMap<K, V>.from(json, fromJsonV);
 
   Map<String, dynamic> toJson() => Map.fromEntries(entries.map((e) => MapEntry(
@@ -179,14 +187,16 @@ mixin _$FreezedMap<K, V> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
   $FreezedMapCopyWith<K, V, FreezedMap<K, V>> get copyWith =>
-      $FreezedMapCopyWith<K, V, FreezedMap<K, V>>(this as FreezedMap<K, V>, _$identity);
+      $FreezedMapCopyWith<K, V, FreezedMap<K, V>>(
+          this as FreezedMap<K, V>, _$identity);
 }
 
 /// Default implementation of the public [FreezedMap] interface.
 class _FreezedMap<K, V> extends FreezedMap<K, V> {
   _FreezedMap.withSafeMap(super.mapFactory, super.map) : super._();
 
-  _FreezedMap.copyAndCheckTypes(Iterable keys, Function lookup) : super._(null, <K, V>{}) {
+  _FreezedMap.copyAndCheckTypes(Iterable keys, Function lookup)
+      : super._(null, <K, V>{}) {
     for (final key in keys) {
       final decoded = switch (key) {
         K k => k,
@@ -203,7 +213,8 @@ class _FreezedMap<K, V> extends FreezedMap<K, V> {
     }
   }
 
-  _FreezedMap.copy(Iterable<K> keys, V Function(K) lookup) : super._(null, <K, V>{}) {
+  _FreezedMap.copy(Iterable<K> keys, V Function(K) lookup)
+      : super._(null, <K, V>{}) {
     assert(isSoundMode, 'null safety is required');
     // if (isSoundMode) {
     for (final key in keys) {
@@ -222,14 +233,11 @@ final class $FreezedMapCopyWith<K, V, $Res> {
   late Map<K, V> _map;
   _FreezedMap<K, V>? _mapOwner;
 
-  $MapFactory<K, V>? get mapFactory => _mapFactory;
-
-  Map<K, V> get map => _map;
-
   final $Res Function(FreezedMap<K, V>) _then;
 
   /// Instantiates with elements from a [Map] or [FreezedMap].
-  factory $FreezedMapCopyWith(FreezedMap<K, V> value, $Res Function(FreezedMap<K, V>) then) {
+  factory $FreezedMapCopyWith(
+      FreezedMap<K, V> value, $Res Function(FreezedMap<K, V>) then) {
     return $FreezedMapCopyWith<K, V, $Res>._uninitialized(then)..replace(value);
   }
 
@@ -398,7 +406,8 @@ final class $FreezedMapCopyWith<K, V, $Res> {
 
   /// As [Map.addEntries].
   @pragma('vm:prefer-inline')
-  $FreezedMapCopyWith<K, V, $Res> addEntries(Iterable<MapEntry<K, V>> newEntries) {
+  $FreezedMapCopyWith<K, V, $Res> addEntries(
+      Iterable<MapEntry<K, V>> newEntries) {
     _safeMap.addEntries(newEntries);
     return this;
   }
@@ -423,8 +432,8 @@ final class $FreezedMapCopyWith<K, V, $Res> {
   $FreezedMapCopyWith._uninitialized(this._then);
 
   void _setOwner(_FreezedMap<K, V> mapOwner) {
-    assert(
-        mapOwner.mapFactory == _mapFactory, "Can't reuse a built map that uses a different base");
+    assert(mapOwner.mapFactory == _mapFactory,
+        "Can't reuse a built map that uses a different base");
     _mapOwner = mapOwner;
     _map = mapOwner.mapInstance;
   }
