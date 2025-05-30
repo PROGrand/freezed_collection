@@ -113,6 +113,8 @@ class CopyOnWriteMap<K, V> implements Map<K, V> {
   void _maybeCopyBeforeWrite() {
     if (!_copyBeforeWrite) return;
     _copyBeforeWrite = false;
-    _map = _mapFactory != null ? (_mapFactory!()..addAll(_map)) : Map<K, V>.from(_map);
+    _map = _mapFactory != null
+        ? (_mapFactory!()..addAll(_map))
+        : Map<K, V>.from(_map);
   }
 }
