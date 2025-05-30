@@ -2,7 +2,7 @@
 
 // ignore_for_file: type=lint
 
-part of 'freezed_list_test.dart';
+part of 'freezed_set_test.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -20,7 +20,7 @@ Map<String, dynamic> _$OneToJson(_One instance) => <String, dynamic>{
 
 _Two _$TwoFromJson(Map<String, dynamic> json) => _Two(
       json['name'] as String,
-      FreezedList<Three>.fromJson(json['threes'] as List<dynamic>,
+      FreezedSet<Three>.fromJson(json['threes'] as List<dynamic>,
           (value) => Three.fromJson(value as Map<String, dynamic>)),
     );
 
@@ -38,7 +38,7 @@ Map<String, dynamic> _$ThreeToJson(_Three instance) => <String, dynamic>{
     };
 
 _Collector _$CollectorFromJson(Map<String, dynamic> json) => _Collector(
-      FreezedList<Numbers>.fromJson(json['numbers'] as List<dynamic>,
+      FreezedSet<Numbers>.fromJson(json['numbers'] as List<dynamic>,
           (value) => Numbers.fromJson(value as Map<String, dynamic>)),
     );
 
@@ -48,7 +48,7 @@ Map<String, dynamic> _$CollectorToJson(_Collector instance) =>
     };
 
 _Numbers _$NumbersFromJson(Map<String, dynamic> json) => _Numbers(
-      FreezedList<int>.fromJson(
+      FreezedSet<int>.fromJson(
           json['values'] as List<dynamic>, (value) => (value as num).toInt()),
     );
 

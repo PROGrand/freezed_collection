@@ -10,7 +10,8 @@ part of 'director.dart';
 
 _Director _$DirectorFromJson(Map<String, dynamic> json) => _Director(
       name: json['name'] as String?,
-      assistants: FreezedMap<int, Assistant>.fromJson(json['assistants'] as Map<String, dynamic>,
+      assistants: FreezedMap<int, Assistant>.fromJson(
+          json['assistants'] as Map<String, dynamic>,
           (value) => Assistant.fromJson(value as Map<String, dynamic>)),
     );
 

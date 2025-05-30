@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'freezed_list_test.dart';
+part of 'freezed_set_test.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -192,7 +192,7 @@ class __$OneCopyWithImpl<$Res> implements _$OneCopyWith<$Res> {
 /// @nodoc
 mixin _$Two {
   String get name;
-  FreezedList<Three> get threes;
+  FreezedSet<Three> get threes;
 
   /// Create a copy of Two
   /// with the given fields replaced by the non-null parameter values.
@@ -228,9 +228,9 @@ mixin _$Two {
 abstract mixin class $TwoCopyWith<$Res> {
   factory $TwoCopyWith(Two value, $Res Function(Two) _then) = _$TwoCopyWithImpl;
   @useResult
-  $Res call({String name, FreezedList<Three> threes});
+  $Res call({String name, FreezedSet<Three> threes});
 
-  $FreezedListCopyWith<Three, $Res> get threes;
+  $FreezedSetCopyWith<Three, $Res> get threes;
 }
 
 /// @nodoc
@@ -256,7 +256,7 @@ class _$TwoCopyWithImpl<$Res> implements $TwoCopyWith<$Res> {
       threes: null == threes
           ? _self.threes
           : threes // ignore: cast_nullable_to_non_nullable
-              as FreezedList<Three>,
+              as FreezedSet<Three>,
     ));
   }
 
@@ -264,8 +264,8 @@ class _$TwoCopyWithImpl<$Res> implements $TwoCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<Three, $Res> get threes {
-    return $FreezedListCopyWith<Three, $Res>(_self.threes, (value) {
+  $FreezedSetCopyWith<Three, $Res> get threes {
+    return $FreezedSetCopyWith<Three, $Res>(_self.threes, (value) {
       return _then(_self.copyWith(threes: value));
     });
   }
@@ -280,7 +280,7 @@ class _Two implements Two {
   @override
   final String name;
   @override
-  final FreezedList<Three> threes;
+  final FreezedSet<Three> threes;
 
   /// Create a copy of Two
   /// with the given fields replaced by the non-null parameter values.
@@ -323,10 +323,10 @@ abstract mixin class _$TwoCopyWith<$Res> implements $TwoCopyWith<$Res> {
       __$TwoCopyWithImpl;
   @override
   @useResult
-  $Res call({String name, FreezedList<Three> threes});
+  $Res call({String name, FreezedSet<Three> threes});
 
   @override
-  $FreezedListCopyWith<Three, $Res> get threes;
+  $FreezedSetCopyWith<Three, $Res> get threes;
 }
 
 /// @nodoc
@@ -352,7 +352,7 @@ class __$TwoCopyWithImpl<$Res> implements _$TwoCopyWith<$Res> {
       null == threes
           ? _self.threes
           : threes // ignore: cast_nullable_to_non_nullable
-              as FreezedList<Three>,
+              as FreezedSet<Three>,
     ));
   }
 
@@ -360,8 +360,8 @@ class __$TwoCopyWithImpl<$Res> implements _$TwoCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<Three, $Res> get threes {
-    return $FreezedListCopyWith<Three, $Res>(_self.threes, (value) {
+  $FreezedSetCopyWith<Three, $Res> get threes {
+    return $FreezedSetCopyWith<Three, $Res>(_self.threes, (value) {
       return _then(_self.copyWith(threes: value));
     });
   }
@@ -506,7 +506,7 @@ class __$ThreeCopyWithImpl<$Res> implements _$ThreeCopyWith<$Res> {
 
 /// @nodoc
 mixin _$Collector {
-  FreezedList<Numbers> get numbers;
+  FreezedSet<Numbers> get numbers;
 
   /// Create a copy of Collector
   /// with the given fields replaced by the non-null parameter values.
@@ -542,9 +542,9 @@ abstract mixin class $CollectorCopyWith<$Res> {
   factory $CollectorCopyWith(Collector value, $Res Function(Collector) _then) =
       _$CollectorCopyWithImpl;
   @useResult
-  $Res call({FreezedList<Numbers> numbers});
+  $Res call({FreezedSet<Numbers> numbers});
 
-  $FreezedListCopyWith<Numbers, $Res> get numbers;
+  $FreezedSetCopyWith<Numbers, $Res> get numbers;
 }
 
 /// @nodoc
@@ -565,7 +565,7 @@ class _$CollectorCopyWithImpl<$Res> implements $CollectorCopyWith<$Res> {
       numbers: null == numbers
           ? _self.numbers
           : numbers // ignore: cast_nullable_to_non_nullable
-              as FreezedList<Numbers>,
+              as FreezedSet<Numbers>,
     ));
   }
 
@@ -573,8 +573,8 @@ class _$CollectorCopyWithImpl<$Res> implements $CollectorCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<Numbers, $Res> get numbers {
-    return $FreezedListCopyWith<Numbers, $Res>(_self.numbers, (value) {
+  $FreezedSetCopyWith<Numbers, $Res> get numbers {
+    return $FreezedSetCopyWith<Numbers, $Res>(_self.numbers, (value) {
       return _then(_self.copyWith(numbers: value));
     });
   }
@@ -588,7 +588,7 @@ class _Collector implements Collector {
       _$CollectorFromJson(json);
 
   @override
-  final FreezedList<Numbers> numbers;
+  final FreezedSet<Numbers> numbers;
 
   /// Create a copy of Collector
   /// with the given fields replaced by the non-null parameter values.
@@ -632,10 +632,10 @@ abstract mixin class _$CollectorCopyWith<$Res>
       __$CollectorCopyWithImpl;
   @override
   @useResult
-  $Res call({FreezedList<Numbers> numbers});
+  $Res call({FreezedSet<Numbers> numbers});
 
   @override
-  $FreezedListCopyWith<Numbers, $Res> get numbers;
+  $FreezedSetCopyWith<Numbers, $Res> get numbers;
 }
 
 /// @nodoc
@@ -656,7 +656,7 @@ class __$CollectorCopyWithImpl<$Res> implements _$CollectorCopyWith<$Res> {
       null == numbers
           ? _self.numbers
           : numbers // ignore: cast_nullable_to_non_nullable
-              as FreezedList<Numbers>,
+              as FreezedSet<Numbers>,
     ));
   }
 
@@ -664,8 +664,8 @@ class __$CollectorCopyWithImpl<$Res> implements _$CollectorCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<Numbers, $Res> get numbers {
-    return $FreezedListCopyWith<Numbers, $Res>(_self.numbers, (value) {
+  $FreezedSetCopyWith<Numbers, $Res> get numbers {
+    return $FreezedSetCopyWith<Numbers, $Res>(_self.numbers, (value) {
       return _then(_self.copyWith(numbers: value));
     });
   }
@@ -673,7 +673,7 @@ class __$CollectorCopyWithImpl<$Res> implements _$CollectorCopyWith<$Res> {
 
 /// @nodoc
 mixin _$Numbers {
-  FreezedList<int> get values;
+  FreezedSet<int> get values;
 
   /// Create a copy of Numbers
   /// with the given fields replaced by the non-null parameter values.
@@ -709,9 +709,9 @@ abstract mixin class $NumbersCopyWith<$Res> {
   factory $NumbersCopyWith(Numbers value, $Res Function(Numbers) _then) =
       _$NumbersCopyWithImpl;
   @useResult
-  $Res call({FreezedList<int> values});
+  $Res call({FreezedSet<int> values});
 
-  $FreezedListCopyWith<int, $Res> get values;
+  $FreezedSetCopyWith<int, $Res> get values;
 }
 
 /// @nodoc
@@ -732,7 +732,7 @@ class _$NumbersCopyWithImpl<$Res> implements $NumbersCopyWith<$Res> {
       values: null == values
           ? _self.values
           : values // ignore: cast_nullable_to_non_nullable
-              as FreezedList<int>,
+              as FreezedSet<int>,
     ));
   }
 
@@ -740,8 +740,8 @@ class _$NumbersCopyWithImpl<$Res> implements $NumbersCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<int, $Res> get values {
-    return $FreezedListCopyWith<int, $Res>(_self.values, (value) {
+  $FreezedSetCopyWith<int, $Res> get values {
+    return $FreezedSetCopyWith<int, $Res>(_self.values, (value) {
       return _then(_self.copyWith(values: value));
     });
   }
@@ -755,7 +755,7 @@ class _Numbers implements Numbers {
       _$NumbersFromJson(json);
 
   @override
-  final FreezedList<int> values;
+  final FreezedSet<int> values;
 
   /// Create a copy of Numbers
   /// with the given fields replaced by the non-null parameter values.
@@ -797,10 +797,10 @@ abstract mixin class _$NumbersCopyWith<$Res> implements $NumbersCopyWith<$Res> {
       __$NumbersCopyWithImpl;
   @override
   @useResult
-  $Res call({FreezedList<int> values});
+  $Res call({FreezedSet<int> values});
 
   @override
-  $FreezedListCopyWith<int, $Res> get values;
+  $FreezedSetCopyWith<int, $Res> get values;
 }
 
 /// @nodoc
@@ -821,7 +821,7 @@ class __$NumbersCopyWithImpl<$Res> implements _$NumbersCopyWith<$Res> {
       null == values
           ? _self.values
           : values // ignore: cast_nullable_to_non_nullable
-              as FreezedList<int>,
+              as FreezedSet<int>,
     ));
   }
 
@@ -829,8 +829,8 @@ class __$NumbersCopyWithImpl<$Res> implements _$NumbersCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<int, $Res> get values {
-    return $FreezedListCopyWith<int, $Res>(_self.values, (value) {
+  $FreezedSetCopyWith<int, $Res> get values {
+    return $FreezedSetCopyWith<int, $Res>(_self.values, (value) {
       return _then(_self.copyWith(values: value));
     });
   }

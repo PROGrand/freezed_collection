@@ -10,9 +10,14 @@ import 'dart:math' show Random;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:freezed_collection/src/internal/copy_on_write_list.dart';
 import 'package:freezed_collection/src/internal/hash.dart' show hashObjects;
-import 'package:freezed_collection/src/internal/iterables.dart' show evaluateIterable;
+import 'package:freezed_collection/src/internal/iterables.dart'
+    show evaluateIterable;
 
-@Freezed(genericArgumentFactories: true, toJson: false, fromJson: false, copyWith: true)
+@Freezed(
+    genericArgumentFactories: true,
+    toJson: false,
+    fromJson: false,
+    copyWith: true)
 abstract class FreezedList<E> with _$FreezedList<E> implements Iterable<E> {
   final List<E> _list;
   int? _hashCode;
@@ -95,10 +100,12 @@ abstract class FreezedList<E> with _$FreezedList<E> implements Iterable<E> {
   int lastIndexOf(E element, [int? start]) => _list.lastIndexOf(element, start);
 
   /// As [List.indexWhere].
-  int indexWhere(bool Function(E) test, [int start = 0]) => _list.indexWhere(test, start);
+  int indexWhere(bool Function(E) test, [int start = 0]) =>
+      _list.indexWhere(test, start);
 
   /// As [List.lastIndexWhere].
-  int lastIndexWhere(bool Function(E) test, [int? start]) => _list.lastIndexWhere(test, start);
+  int lastIndexWhere(bool Function(E) test, [int? start]) =>
+      _list.lastIndexWhere(test, start);
 
   /// As [List.sublist] but returns a `FreezedList<E>`.
   FreezedList<E> sublist(int start, [int? end]) =>
@@ -137,7 +144,8 @@ abstract class FreezedList<E> with _$FreezedList<E> implements Iterable<E> {
   E reduce(E Function(E, E) combine) => _list.reduce(combine);
 
   @override
-  T fold<T>(T initialValue, T Function(T, E) combine) => _list.fold(initialValue, combine);
+  T fold<T>(T initialValue, T Function(T, E) combine) =>
+      _list.fold(initialValue, combine);
 
   @override
   Iterable<E> followedBy(Iterable<E> other) => _list.followedBy(other);
@@ -216,7 +224,8 @@ abstract class FreezedList<E> with _$FreezedList<E> implements Iterable<E> {
 
   //endregion
 
-  factory FreezedList.fromJson(List<dynamic> json, E Function(Object?) fromJsonE) =>
+  factory FreezedList.fromJson(
+          List<dynamic> json, E Function(Object?) fromJsonE) =>
       FreezedList(json.map(fromJsonE).toList());
 
   List<dynamic> toJson() => _list.map((e) => e).toList();
@@ -235,37 +244,41 @@ mixin _$FreezedList<E> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
   $FreezedListCopyWith<E, FreezedList<E>> get copyWith =>
-      $FreezedListCopyWith<E, FreezedList<E>>(this as FreezedList<E>, _$identity);
+      $FreezedListCopyWith<E, FreezedList<E>>(
+          this as FreezedList<E>, _$identity);
 }
 
-/// Default implementation of the public [FreezedMap] interface.
+/// Default implementation of the public [FreezedList] interface.
 class _FreezedList<E> extends FreezedList<E> {
   _FreezedList.withSafeList(List<E> list) : super._(list);
 
   _FreezedList.from([Iterable iterable = const []])
       : super._(List<E>.from(iterable, growable: false));
 
-  _FreezedList.of(Iterable<E> iterable) : super._(List<E>.from(iterable, growable: false));
+  _FreezedList.of(Iterable<E> iterable)
+      : super._(List<E>.from(iterable, growable: false));
 
   bool hasExactElementType(Type type) => E == type;
 }
 
 /// @nodoc
 final class $FreezedListCopyWith<E, $Res> {
-  /// Instantiates with elements from a [Map] or [FreezedMap].
-  factory $FreezedListCopyWith(FreezedList<E> value, $Res Function(FreezedList<E>) then) {
+  /// Instantiates with elements from a [List] or [FreezedList].
+  factory $FreezedListCopyWith(
+      FreezedList<E> value, $Res Function(FreezedList<E>) then) {
     return $FreezedListCopyWith<E, $Res>._uninitialized(then)..replace(value);
   }
 
-  // final FreezedList<E> _self;
   final $Res Function(FreezedList<E>) _then;
 
   late List<E> _list;
   _FreezedList<E>? _listOwner;
 
   /// Instantiates with elements from an [Iterable<E>].
-  factory $FreezedListCopyWith.of(FreezedList<E> iterable, $Res Function(FreezedList<E>) then) {
-    return $FreezedListCopyWith<E, $Res>._uninitialized(then).._replaceOf(iterable);
+  factory $FreezedListCopyWith.of(
+      FreezedList<E> iterable, $Res Function(FreezedList<E>) then) {
+    return $FreezedListCopyWith<E, $Res>._uninitialized(then)
+      .._replaceOf(iterable);
   }
 
   /// Converts to a [FreezedList].
@@ -282,21 +295,22 @@ final class $FreezedListCopyWith<E, $Res> {
   }
 
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<E, $Res> call(Iterable? list) {
+  $FreezedListCopyWith<E, $Res> call(Iterable list) {
     replace(list);
     return this;
   }
 
   /// Applies a function to `this`.
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<E, $Res> update(Function($FreezedListCopyWith<E, $Res>) updates) {
+  $FreezedListCopyWith<E, $Res> update(
+      Function($FreezedListCopyWith<E, $Res>) updates) {
     updates(this);
     return this;
   }
 
   /// Replaces all elements with elements from an [Iterable].
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<E, $Res> replace(Iterable? iterable) {
+  $FreezedListCopyWith<E, $Res> replace(Iterable iterable) {
     switch (iterable) {
       case _FreezedList<E> freezedList:
         _setOwner(freezedList);
@@ -385,7 +399,8 @@ final class $FreezedListCopyWith<E, $Res> {
   }
 
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<E, $Res> replaceFirstWhere(E newElement, bool Function(E element) test) {
+  $FreezedListCopyWith<E, $Res> replaceFirstWhere(
+      E newElement, bool Function(E element) test) {
     final index = _safeList.indexWhere((element) => test(element));
     if (-1 != index) {
       _safeList[index] = newElement;
@@ -394,7 +409,8 @@ final class $FreezedListCopyWith<E, $Res> {
   }
 
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<E, $Res> removeFirstWhere(bool Function(E element) test) {
+  $FreezedListCopyWith<E, $Res> removeFirstWhere(
+      bool Function(E element) test) {
     final index = _safeList.indexWhere((element) => test(element));
     if (-1 != index) {
       _safeList.removeAt(index);
@@ -503,7 +519,8 @@ final class $FreezedListCopyWith<E, $Res> {
 
   /// As [List.setRange].
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<E, $Res> setRange(int start, int end, Iterable<E> iterable,
+  $FreezedListCopyWith<E, $Res> setRange(
+      int start, int end, Iterable<E> iterable,
       [int skipCount = 0]) {
     iterable = evaluateIterable(iterable);
     _safeList.setRange(start, end, iterable, skipCount);
@@ -526,7 +543,8 @@ final class $FreezedListCopyWith<E, $Res> {
 
   /// As [List.replaceRange].
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<E, $Res> replaceRange(int start, int end, Iterable<E> iterable) {
+  $FreezedListCopyWith<E, $Res> replaceRange(
+      int start, int end, Iterable<E> iterable) {
     iterable = evaluateIterable(iterable);
     _safeList.replaceRange(start, end, iterable);
     return this;
@@ -546,7 +564,8 @@ final class $FreezedListCopyWith<E, $Res> {
   ///
   /// This method is an alias of [retainWhere].
   @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<E, $Res> where(bool Function(E) test) => retainWhere(test);
+  $FreezedListCopyWith<E, $Res> where(bool Function(E) test) =>
+      retainWhere(test);
 
   /// As [Iterable.expand], but updates the builder in place. Returns nothing.
   @pragma('vm:prefer-inline')

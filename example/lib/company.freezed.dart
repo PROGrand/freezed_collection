@@ -34,7 +34,8 @@ mixin _$Company {
         (other.runtimeType == runtimeType &&
             other is Company &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.director, director) || other.director == director));
+            (identical(other.director, director) ||
+                other.director == director));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +50,8 @@ mixin _$Company {
 
 /// @nodoc
 abstract mixin class $CompanyCopyWith<$Res> {
-  factory $CompanyCopyWith(Company value, $Res Function(Company) _then) = _$CompanyCopyWithImpl;
+  factory $CompanyCopyWith(Company value, $Res Function(Company) _then) =
+      _$CompanyCopyWithImpl;
   @useResult
   $Res call({String? name, Director director});
 
@@ -98,7 +100,8 @@ class _$CompanyCopyWithImpl<$Res> implements $CompanyCopyWith<$Res> {
 @JsonSerializable()
 class _Company implements Company {
   _Company({this.name, required this.director});
-  factory _Company.fromJson(Map<String, dynamic> json) => _$CompanyFromJson(json);
+  factory _Company.fromJson(Map<String, dynamic> json) =>
+      _$CompanyFromJson(json);
 
   @override
   final String? name;
@@ -110,7 +113,8 @@ class _Company implements Company {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$CompanyCopyWith<_Company> get copyWith => __$CompanyCopyWithImpl<_Company>(this, _$identity);
+  _$CompanyCopyWith<_Company> get copyWith =>
+      __$CompanyCopyWithImpl<_Company>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -125,7 +129,8 @@ class _Company implements Company {
         (other.runtimeType == runtimeType &&
             other is _Company &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.director, director) || other.director == director));
+            (identical(other.director, director) ||
+                other.director == director));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -140,7 +145,8 @@ class _Company implements Company {
 
 /// @nodoc
 abstract mixin class _$CompanyCopyWith<$Res> implements $CompanyCopyWith<$Res> {
-  factory _$CompanyCopyWith(_Company value, $Res Function(_Company) _then) = __$CompanyCopyWithImpl;
+  factory _$CompanyCopyWith(_Company value, $Res Function(_Company) _then) =
+      __$CompanyCopyWithImpl;
   @override
   @useResult
   $Res call({String? name, Director director});

@@ -34,7 +34,8 @@ mixin _$Director {
         (other.runtimeType == runtimeType &&
             other is Director &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.assistants, assistants) || other.assistants == assistants));
+            (identical(other.assistants, assistants) ||
+                other.assistants == assistants));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +50,8 @@ mixin _$Director {
 
 /// @nodoc
 abstract mixin class $DirectorCopyWith<$Res> {
-  factory $DirectorCopyWith(Director value, $Res Function(Director) _then) = _$DirectorCopyWithImpl;
+  factory $DirectorCopyWith(Director value, $Res Function(Director) _then) =
+      _$DirectorCopyWithImpl;
   @useResult
   $Res call({String? name, FreezedMap<int, Assistant> assistants});
 
@@ -98,7 +100,8 @@ class _$DirectorCopyWithImpl<$Res> implements $DirectorCopyWith<$Res> {
 @JsonSerializable()
 class _Director implements Director {
   _Director({this.name, required this.assistants});
-  factory _Director.fromJson(Map<String, dynamic> json) => _$DirectorFromJson(json);
+  factory _Director.fromJson(Map<String, dynamic> json) =>
+      _$DirectorFromJson(json);
 
   @override
   final String? name;
@@ -126,7 +129,8 @@ class _Director implements Director {
         (other.runtimeType == runtimeType &&
             other is _Director &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.assistants, assistants) || other.assistants == assistants));
+            (identical(other.assistants, assistants) ||
+                other.assistants == assistants));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -140,7 +144,8 @@ class _Director implements Director {
 }
 
 /// @nodoc
-abstract mixin class _$DirectorCopyWith<$Res> implements $DirectorCopyWith<$Res> {
+abstract mixin class _$DirectorCopyWith<$Res>
+    implements $DirectorCopyWith<$Res> {
   factory _$DirectorCopyWith(_Director value, $Res Function(_Director) _then) =
       __$DirectorCopyWithImpl;
   @override
