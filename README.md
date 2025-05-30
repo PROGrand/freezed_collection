@@ -52,7 +52,10 @@ final two = one.copyWith.two.three.withBase(() =>
 [//]: # ( @formatter:off)
 ```dart
 final map = FreezedMap({'1': 1});
-final map2 = map.copyWith(map: {'2': 2, '3': 3}).updateAllValues((k, p0) => p0 + 1).removeWhere((k, v) => 2 == v).seal();
+final map2 = map.copyWith(map: {'2': 2, '3': 3})
+    .updateAllValues((k, p0) => p0 + 1)
+    .removeWhere((k, v) => 2 == v)
+    .seal();
 ```
 [//]: # ( @formatter:on)
 
