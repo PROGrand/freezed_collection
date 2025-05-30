@@ -41,14 +41,16 @@ abstract class Three with _$Three {
 abstract class Collector with _$Collector {
   const factory Collector(FreezedList<Numbers> numbers) = _Collector;
 
-  factory Collector.fromJson(Map<String, dynamic> json) => _$CollectorFromJson(json);
+  factory Collector.fromJson(Map<String, dynamic> json) =>
+      _$CollectorFromJson(json);
 }
 
 @freezed
 abstract class Numbers with _$Numbers {
   const factory Numbers(FreezedList<int> values) = _Numbers;
 
-  factory Numbers.fromJson(Map<String, dynamic> json) => _$NumbersFromJson(json);
+  factory Numbers.fromJson(Map<String, dynamic> json) =>
+      _$NumbersFromJson(json);
 }
 
 void main() {
@@ -66,16 +68,20 @@ void main() {
     });
 
     test('FreezedList has deep copyWith', () {
-      final one = One('1', Two('2', FreezedList([Three('31'), Three('32'), Three('31')])));
+      final one = One(
+          '1', Two('2', FreezedList([Three('31'), Three('32'), Three('31')])));
 
-      final abc = one.copyWith.two.threes([Three('a'), Three('b'), Three('c')]).seal();
+      final abc =
+          one.copyWith.two.threes([Three('a'), Three('b'), Three('c')]).seal();
 
       expect(abc.two.threes.map((p0) => p0.name), equals(['a', 'b', 'c']));
     });
 
     test('Freezed Test', () {
-      final one1 = One('1', Two('2', FreezedList([Three('31'), Three('32'), Three('33')])));
-      final one2 = One('1', Two('2', FreezedList([Three('31'), Three('32'), Three('33')])));
+      final one1 = One(
+          '1', Two('2', FreezedList([Three('31'), Three('32'), Three('33')])));
+      final one2 = One(
+          '1', Two('2', FreezedList([Three('31'), Three('32'), Three('33')])));
       final one2copy = one2.copyWith();
       expect(one1, equals(one2));
       expect(one1, equals(one2copy));
@@ -168,15 +174,19 @@ void main() {
   group('FreezedList', () {
     test('has replaceFirstWhere', () {
       final list = FreezedList([1, 2, 1]);
-      final list2 = list.copyWith.replaceFirstWhere(0, (element) => element == 1).seal();
+      final list2 =
+          list.copyWith.replaceFirstWhere(0, (element) => element == 1).seal();
 
+      expect(list, equals([1, 2, 1]));
       expect(list2, equals([0, 2, 1]));
     });
 
     test('has replaceFirstWhere -1', () {
       final list = FreezedList([1, 2, 1]);
-      final list2 = list.copyWith.replaceFirstWhere(0, (element) => element == 7).seal();
+      final list2 =
+          list.copyWith.replaceFirstWhere(0, (element) => element == 7).seal();
 
+      expect(list, equals([1, 2, 1]));
       expect(list2, equals([1, 2, 1]));
     });
 
@@ -184,6 +194,7 @@ void main() {
       final list = FreezedList([1, 2]);
       final list2 = list.copyWith([4, 5]).seal();
 
+      expect(list, equals([1, 2]));
       expect(list2, equals([4, 5]));
     });
 
@@ -191,6 +202,7 @@ void main() {
       final list = FreezedList([1, 2]);
       final list2 = list.copyWith(null).seal();
 
+      expect(list, equals([1, 2]));
       expect(list2, equals([1, 2]));
     });
 
@@ -198,6 +210,7 @@ void main() {
       final list = FreezedList([1, 2]);
       final list2 = list.copyWith.add(3).seal();
 
+      expect(list, equals([1, 2]));
       expect(list2, equals([1, 2, 3]));
     });
 
@@ -205,6 +218,7 @@ void main() {
       final list = FreezedList([1, 2, 3]);
       final list2 = list.copyWith.addAll([4, 5]).seal();
 
+      expect(list, equals([1, 2, 3]));
       expect(list2, equals([1, 2, 3, 4, 5]));
     });
 
@@ -212,6 +226,7 @@ void main() {
       final list = FreezedList([1, 2, 3]);
       final list2 = list.copyWith.clear().seal();
 
+      expect(list, equals([1, 2, 3]));
       expect(list2, equals([]));
     });
 
@@ -219,6 +234,7 @@ void main() {
       final list = FreezedList([1, 1, 1, 1, 1]);
       final list2 = list.copyWith.fillRange(1, 3, 0).seal();
 
+      expect(list, equals([1, 1, 1, 1, 1]));
       expect(list2, equals([1, 0, 0, 1, 1]));
     });
 
@@ -226,6 +242,7 @@ void main() {
       final list = FreezedList([1, 2, 3]);
       final list2 = list.copyWith.insert(0, 0).seal();
 
+      expect(list, equals([1, 2, 3]));
       expect(list2, equals([0, 1, 2, 3]));
     });
 
@@ -233,6 +250,7 @@ void main() {
       final list = FreezedList([1, 2, 3]);
       final list2 = list.copyWith.insertAll(1, [0, 0, 0]).seal();
 
+      expect(list, equals([1, 2, 3]));
       expect(list2, equals([1, 0, 0, 0, 2, 3]));
     });
 
@@ -240,6 +258,7 @@ void main() {
       final list = FreezedList([1, 2, 3]);
       final list2 = (list.copyWith..remove(2)).seal();
 
+      expect(list, equals([1, 2, 3]));
       expect(list2, equals([1, 3]));
     });
 
@@ -247,20 +266,25 @@ void main() {
       final list = FreezedList([1, 2, 3]);
       final list2 = (list.copyWith..removeAt(1)).seal();
 
+      expect(list, equals([1, 2, 3]));
       expect(list2, equals([1, 3]));
     });
 
     test('has removeFirstWhere', () {
       final list = FreezedList([1, 2, 1]);
-      final list2 = list.copyWith.removeFirstWhere((element) => element == 1).seal();
+      final list2 =
+          list.copyWith.removeFirstWhere((element) => element == 1).seal();
 
+      expect(list, equals([1, 2, 1]));
       expect(list2, equals([2, 1]));
     });
 
     test('has removeFirstWhere -1', () {
       final list = FreezedList([1, 2, 1]);
-      final list2 = list.copyWith.removeFirstWhere((element) => element == 7).seal();
+      final list2 =
+          list.copyWith.removeFirstWhere((element) => element == 7).seal();
 
+      expect(list, equals([1, 2, 1]));
       expect(list2, equals([1, 2, 1]));
     });
 
@@ -268,6 +292,7 @@ void main() {
       final list = FreezedList([1, 2, 3]);
       final list2 = (list.copyWith..removeLast()).seal();
 
+      expect(list, equals([1, 2, 3]));
       expect(list2, equals([1, 2]));
     });
 
@@ -275,6 +300,7 @@ void main() {
       final list = FreezedList([1, 2, 3, 4, 5]);
       final list2 = list.copyWith.removeRange(1, 3).seal();
 
+      expect(list, equals([1, 2, 3, 4, 5]));
       expect(list2, equals([1, 4, 5]));
     });
 
@@ -282,6 +308,7 @@ void main() {
       final list = FreezedList([1, 2, 1]);
       final list2 = list.copyWith.removeWhere((element) => element == 1).seal();
 
+      expect(list, equals([1, 2, 1]));
       expect(list2, equals([2]));
     });
 
@@ -289,6 +316,7 @@ void main() {
       final list = FreezedList([1, 2, 1]);
       final list2 = list.copyWith.retainWhere((element) => element == 2).seal();
 
+      expect(list, equals([1, 2, 1]));
       expect(list2, equals([2]));
     });
 
@@ -296,6 +324,7 @@ void main() {
       final list = FreezedList([1, 2, 3]);
       final list2 = list.copyWith..[1] = 0;
 
+      expect(list, equals([1, 2, 3]));
       expect(list2.seal(), equals([1, 0, 3]));
     });
 
@@ -303,6 +332,7 @@ void main() {
       final list = FreezedList([1, 2, 3]);
       final list2 = list.copyWith.setAll(1, [4, 5]).seal();
 
+      expect(list, equals([1, 2, 3]));
       expect(list2, equals([1, 4, 5]));
     });
 
@@ -313,6 +343,8 @@ void main() {
 
       final list3 = (list.copyWith..last = 3).seal();
       expect(list3, equals([1, 2, 3]));
+
+      expect(list, equals([1, 2, 3]));
     });
 
     test('has setLength', () {
@@ -322,12 +354,15 @@ void main() {
 
       final list3 = (list.copyWith..length = 4).seal();
       expect(list3, equals([1, 2, 3, null]));
+
+      expect(list, equals([1, 2, 3]));
     });
 
     test('has setFirst', () {
       final list = FreezedList([1, 2, 3]);
       final list2 = list.copyWith.setFirst(0).seal();
 
+      expect(list, equals([1, 2, 3]));
       expect(list2, equals([0, 2, 3]));
     });
 
@@ -335,6 +370,7 @@ void main() {
       final list = FreezedList([1, 2, 3]);
       final list2 = list.copyWith.setRange(1, 3, [4, 5]).seal();
 
+      expect(list, equals([1, 2, 3]));
       expect(list2, equals([1, 4, 5]));
     });
 
@@ -342,6 +378,7 @@ void main() {
       final list = FreezedList([3, 1, 2]);
       final list2 = list.copyWith.sort((a, b) => a.compareTo(b)).seal();
 
+      expect(list, equals([3, 1, 2]));
       expect(list2, equals([1, 2, 3]));
     });
 
@@ -350,6 +387,7 @@ void main() {
       final random = _NoRandom();
       final list2 = list.copyWith.shuffle(random).seal();
 
+      expect(list, equals([1, 2, 3, 4, 5]));
       expect(list2, equals([1, 2, 3, 4, 5]..shuffle(random)));
     });
 
@@ -357,6 +395,7 @@ void main() {
       final list = FreezedList([1, 2, 3, 4, 5]);
       final list2 = list.copyWith.replaceRange(1, 3, [7, 8, 9, 10]).seal();
 
+      expect(list, equals([1, 2, 3, 4, 5]));
       expect(list2, equals([1, 7, 8, 9, 10, 4, 5]));
     });
   });
