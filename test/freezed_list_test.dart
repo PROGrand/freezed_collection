@@ -7,6 +7,7 @@
 
 //dart pub global activate coverage
 //dart pub global run coverage:test_with_coverage
+import 'dart:convert';
 import 'dart:math' show Random;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -397,6 +398,377 @@ void main() {
 
       expect(list, equals([1, 2, 3, 4, 5]));
       expect(list2, equals([1, 7, 8, 9, 10, 4, 5]));
+    });
+
+    test('has of', () {
+      final list = FreezedList.of([1, 2, 3, 4, 5]);
+      expect(list, equals([1, 2, 3, 4, 5]));
+    });
+
+    test('has hashCode', () {
+      final list = FreezedList.of([1, 2, 3, 4, 5]);
+      final listCopy = list.copyWith.seal();
+      final list2 = FreezedList.of([1, 2, 3, 4, 6]);
+      expect(list.hashCode, equals(listCopy.hashCode));
+      expect(list.hashCode, isNot(equals(list2.hashCode)));
+    });
+
+    test('has ==', () {
+      expect(FreezedList.of([1, 2]), equals(FreezedList.of([1, 2])));
+      expect(FreezedList.of([1, 2]), isNot(equals(FreezedList.of([1, 3]))));
+    });
+
+    test('has toString', () {
+      expect(FreezedList.of([1, 2]).toString(), isNotEmpty);
+    });
+
+    test('has asList', () {
+      expect(() => FreezedList.of([1, 2]).asList().removeAt(0),
+          throwsUnsupportedError);
+    });
+
+    test('has +', () {
+      final list = FreezedList([1, 2, 3]);
+      final list2 = FreezedList([4, 5]);
+
+      expect(list + list2, equals([1, 2, 3, 4, 5]));
+    });
+
+    test('has reversed', () {
+      final list = FreezedList([1, 2, 3]);
+
+      expect(list.reversed, equals([3, 2, 1]));
+    });
+
+    test('has index', () {
+      final list = FreezedList([1, 2, 3, 2, 3]);
+
+      expect(list.indexOf(2), equals(1));
+      expect(list.lastIndexOf(2), equals(3));
+      expect(list.indexWhere((p0) => p0 > 2), equals(2));
+      expect(list.lastIndexWhere((p0) => p0 > 2), equals(4));
+    });
+
+    test('has sublist', () {
+      final list = FreezedList([1, 2, 3, 2, 3]);
+
+      expect(list.sublist(1), equals([2, 3, 2, 3]));
+      expect(list.sublist(1, 3), equals([2, 3]));
+      expect(() => list.sublist(7), throwsRangeError);
+      expect(list.sublist(1, 3), isA<FreezedList>());
+    });
+
+    test('has getRange', () {
+      final list = FreezedList([1, 2, 3, 2, 3]);
+
+      expect(list.getRange(1, 3), equals([2, 3]));
+      expect(list.getRange(1, 3), isA<Iterable>());
+    });
+
+    test('has asMap', () {
+      final list = FreezedList([1, 2, 3]);
+
+      expect(list.asMap(), equals({0: 1, 1: 2, 2: 3}));
+    });
+
+    test('has where', () {
+      final list = FreezedList([1, 2, 3]);
+
+      expect(list.where((p0) => p0 % 2 == 1), equals([1, 3]));
+    });
+
+    test('has whereType', () {
+      final list = FreezedList([1, 2, '3']);
+
+      expect(list.whereType<String>(), equals(['3']));
+    });
+
+    test('has expand', () {
+      final list = FreezedList([1, 2, 3]);
+
+      expect(list.expand((p0) => [p0 + 10, p0 * 10]),
+          equals([11, 10, 12, 20, 13, 30]));
+    });
+
+    test('has contains', () {
+      expect(FreezedList.of([1, 2, 3]).contains(1), isTrue);
+      expect(FreezedList.of([1, 2, 3]).contains(4), isFalse);
+      //ignore: collection_methods_unrelated_type
+      expect(FreezedList.of([1, 2, 3]).contains('1'), isFalse);
+    });
+
+    test('has for-loop', () {
+      var cnt = 0;
+      for (final n in FreezedList.of([1, 2, 3])) {
+        cnt += n;
+      }
+      expect(cnt, equals(6));
+    });
+
+    test('has forEach', () {
+      var cnt = 0;
+      // ignore: avoid_function_literals_in_foreach_calls
+      FreezedList.of([1, 2, 3]).forEach((p0) => cnt += p0);
+
+      expect(cnt, equals(6));
+    });
+
+    test('has reduce', () {
+      expect(FreezedList.of([1, 2, 3]).reduce((p0, p1) => p0 * p1), equals(6));
+    });
+
+    test('has fold', () {
+      expect(
+          FreezedList.of([1, 2, 3]).fold(10, (p0, p1) => p0 * p1), equals(60));
+    });
+
+    test('has every', () {
+      expect(FreezedList.of([1, 2, 3]).every((p0) => p0 < 0), isFalse);
+      expect(FreezedList.of([1, 2, 3]).every((p0) => p0 > 0), isTrue);
+    });
+
+    test('has join', () {
+      expect(FreezedList.of([1, 2, 3]).join(' '), equals('1 2 3'));
+    });
+
+    test('has any', () {
+      expect(FreezedList.of([1, 2, '3']).any((p0) => p0 is String), isTrue);
+      expect(FreezedList.of([1, 2, 3]).any((p0) => p0 < 0), isFalse);
+    });
+
+    test('has followedBy', () {
+      expect(FreezedList.of([1, 2, 3]).followedBy([4, 5]),
+          equals([1, 2, 3, 4, 5]));
+    });
+
+    test('has toList', () {
+      expect(FreezedList.of([1, 2, 3]).toList(),
+          isA<List>().having((p0) => p0, 'elements', [1, 2, 3]));
+    });
+
+    test('has toSet', () {
+      expect(FreezedList.of([1, 2, 3]).toSet(),
+          isA<Set>().having((p0) => p0, 'elements', [1, 2, 3]));
+    });
+
+    test('has isEmpty', () {
+      expect(FreezedList.of([1, 2, 3]).isEmpty, isFalse);
+      expect(FreezedList.of([]).isEmpty, isTrue);
+      expect(FreezedList.of([1, 2, 3]).isNotEmpty, isTrue);
+      expect(FreezedList.of([]).isNotEmpty, isFalse);
+    });
+
+    test('has take', () {
+      expect(FreezedList.of([1, 2, 3, 4, 5]).take(2), equals([1, 2]));
+    });
+
+    test('has takeWhile', () {
+      expect(FreezedList.of([1, 2, 3, 4, 5]).takeWhile((p0) => p0 != 3),
+          equals([1, 2]));
+    });
+
+    test('has skip', () {
+      expect(FreezedList.of([1, 2, 3, 4, 5]).skip(2), equals([3, 4, 5]));
+    });
+
+    test('has skipWhile', () {
+      expect(FreezedList.of([1, 2, 3, 4, 5]).skipWhile((p0) => p0 != 3),
+          equals({3, 4, 5}));
+    });
+
+    test('has first', () {
+      expect(FreezedList.of([1, 2, 3, 4, 5]).first, equals(1));
+    });
+
+    test('has last', () {
+      expect(FreezedList.of([1, 2, 3, 4, 5]).last, equals(5));
+    });
+
+    test('has single', () {
+      expect(FreezedList.of([1]).single, equals(1));
+      expect(() => FreezedList.of([1, 2]).single, throwsStateError);
+      expect(() => FreezedList.of({}).single, throwsStateError);
+    });
+
+    test('has firstWhere', () {
+      expect(FreezedList.of([1, 2, 3]).firstWhere((p0) => p0 == 2), equals(2));
+      expect(() => FreezedList.of([1, 2]).firstWhere((p0) => p0 == 100),
+          throwsStateError);
+    });
+
+    test('has lastWhere', () {
+      expect(
+          FreezedList.of([1, 2, 3]).lastWhere((p0) => p0 % 2 == 1), equals(3));
+      expect(() => FreezedList.of([1, 2]).lastWhere((p0) => p0 == 100),
+          throwsStateError);
+    });
+
+    test('has singleWhere', () {
+      expect(FreezedList.of([1, 2, 3]).singleWhere((p0) => p0 == 2), equals(2));
+      expect(() => FreezedList.of([1, 2]).singleWhere((p0) => p0 == 100),
+          throwsStateError);
+    });
+
+    test('has elementAt', () {
+      expect(FreezedList.of([1, 2, 3]).elementAt(1), equals(2));
+      expect(() => FreezedList.of([1, 2]).elementAt(100), throwsRangeError);
+    });
+
+    test('has cast', () {
+      expect(FreezedList.of([1, 2]).cast<int>(), equals([1, 2]));
+    });
+
+    test('has fromJson', () {
+      expect(FreezedList.fromJson(json.decode('[1, 2, 3]'), (p0) => p0),
+          equals([1, 2, 3]));
+    });
+
+    test('has toJson', () {
+      final s = json.encode(FreezedList.of([1, 2, 3]).toJson());
+
+      expect(
+          FreezedList.fromJson(json.decode(s), (p0) => p0), equals([1, 2, 3]));
+    });
+
+    test('has copyWith update', () {
+      final s = List.of([0]);
+      var freezedList = FreezedList.of([1, 2, 3]);
+      freezedList.copyWith.update((p0) => s.addAll(p0.seal()));
+
+      expect(s, equals([0, 1, 2, 3]));
+
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith []', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(freezedList.copyWith[1], equals(2));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith []=', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect((freezedList.copyWith..[1] = 7).seal(), equals([1, 7, 3]));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has type error', () {
+      expect(() => FreezedList<int>(['1']), throwsA(TypeMatcher<TypeError>()));
+    });
+
+    test('has copyWith length', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(freezedList.copyWith.length, equals(3));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith isEmpty', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(freezedList.copyWith.isEmpty, isFalse);
+      var freezedList2 = FreezedList.of([]);
+      expect(freezedList2.copyWith.isEmpty, isTrue);
+      expect(freezedList, equals([1, 2, 3]));
+      expect(freezedList2, equals([]));
+    });
+
+    test('has copyWith isNotEmpty', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(freezedList.copyWith.isNotEmpty, isTrue);
+      var freezedList2 = FreezedList.of([]);
+      expect(freezedList2.copyWith.isNotEmpty, isFalse);
+      expect(freezedList, equals([1, 2, 3]));
+      expect(freezedList2, equals([]));
+    });
+
+    test('has copyWith remove', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect((freezedList.copyWith..remove(1)).seal(), equals([2, 3]));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith addAll', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(
+          freezedList.copyWith.addAll({4, 5}).seal(), equals([1, 2, 3, 4, 5]));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith where', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(freezedList.copyWith.where((p0) => p0 < 3).seal(), equals([1, 2]));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith map', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(
+          freezedList.copyWith.map((p0) => p0 + 1).seal(), equals([2, 3, 4]));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith expand', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(freezedList.copyWith.expand((p0) => [p0 * 10, p0 * 20]).seal(),
+          equals([10, 20, 20, 40, 30, 60]));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith take', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(freezedList.copyWith.take(2).seal(), equals([1, 2]));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith takeWhile', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(freezedList.copyWith.takeWhile((p0) => p0 <= 2).seal(),
+          equals([1, 2]));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith skip', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(freezedList.copyWith.skip(2).seal(), equals([3]));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith skipWhile', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(
+          freezedList.copyWith.skipWhile((p0) => p0 <= 2).seal(), equals([3]));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith first', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(freezedList.copyWith.first, equals(1));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith first=', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect((freezedList.copyWith..first = 7).seal(), equals([7, 2, 3]));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith last', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect(freezedList.copyWith.last, equals(3));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith reverse', () {
+      var freezedList = FreezedList.of([1, 2, 3]);
+      expect((freezedList.copyWith.reverse()).seal(), equals([3, 2, 1]));
+      expect(freezedList, equals([1, 2, 3]));
+    });
+
+    test('has copyWith sublist', () {
+      var freezedList = FreezedList.of([1, 2, 3, 4, 5]);
+
+      expect((freezedList.copyWith.sublist(1, 3)).seal(), equals([2, 3]));
+
+      expect(freezedList, equals([1, 2, 3, 4, 5]));
     });
   });
 }

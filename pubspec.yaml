@@ -1,6 +1,6 @@
 name: freezed_collection
 description: Extending dart:freezed to deep copyWith for collection.
-version: 2.1.3-pre1
+version: 2.1.4
 homepage: https://github.com/PROGrand/freezed_collection
 repository: https://github.com/PROGrand/freezed_collection
 

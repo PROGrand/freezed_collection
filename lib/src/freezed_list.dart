@@ -275,13 +275,6 @@ final class $FreezedListCopyWith<E, $Res> {
   late List<E> _list;
   _FreezedList<E>? _listOwner;
 
-  /// Instantiates with elements from an [Iterable<E>].
-  factory $FreezedListCopyWith.of(
-      FreezedList<E> iterable, $Res Function(FreezedList<E>) then) {
-    return $FreezedListCopyWith<E, $Res>._uninitialized(then)
-      .._replaceOf(iterable);
-  }
-
   /// Converts to a [FreezedList].
   ///
   /// The `$FreezedListCopyWith` can be modified again and used to create any number
@@ -320,15 +313,6 @@ final class $FreezedListCopyWith<E, $Res> {
     }
 
     return this;
-  }
-
-  /// Replaces all elements with elements from an [Iterable<E>].
-  void _replaceOf(Iterable<E> iterable) {
-    if (iterable is _FreezedList<E>) {
-      _setOwner(iterable);
-    } else {
-      _setSafeList(List<E>.of(iterable));
-    }
   }
 
   // Based on List.
