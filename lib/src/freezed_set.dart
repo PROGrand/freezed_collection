@@ -282,9 +282,15 @@ class _FreezedSet<E> extends FreezedSet<E> {
 /// @nodoc
 class $FreezedSetCopyWith<E, $Res> {
   factory $FreezedSetCopyWith(
-      FreezedSet<E> value, $Res Function(FreezedSet<E>) then) {
-    return $FreezedSetCopyWith<E, $Res>._uninitialized(then)..replace(value);
+      Iterable<E> iterable, $Res Function(FreezedSet<E>) then) {
+    return $FreezedSetCopyWith<E, $Res>._uninitialized(then)..replace(iterable);
   }
+
+  // factory $FreezedSetCopyWith.of(
+  //     Iterable<E> iterable, $Res Function(Iterable<E> then) then) {
+  //   return $FreezedSetCopyWith<E, $Res>._uninitialized(then)
+  //     .._replaceOf(iterable);
+  // }
 
   final $Res Function(FreezedSet<E>) _then;
 
@@ -292,13 +298,6 @@ class $FreezedSetCopyWith<E, $Res> {
   $SetFactory<E>? _setFactory;
   late Set<E> _set;
   _FreezedSet<E>? _setOwner;
-
-  /// Instantiates with elements from an [Iterable<E>].
-  factory $FreezedSetCopyWith.of(
-      Iterable<E> iterable, $Res Function(FreezedSet<E>) then) {
-    return $FreezedSetCopyWith<E, $Res>._uninitialized(then)
-      .._replaceOf(iterable);
-  }
 
   /// Converts to a [FreezedSet].
   ///
@@ -330,7 +329,9 @@ class $FreezedSetCopyWith<E, $Res> {
     if (iterable is _FreezedSet<E> && iterable.setFactory == _setFactory) {
       _withOwner(iterable);
     } else {
-      // Can't use addAll because it requires an Iterable<E>.
+      if (iterable is _FreezedSet<E>) {
+        _setFactory = iterable.__setFactory;
+      }
       final set = _createSet();
       for (final element in iterable) {
         if (element is E) {
@@ -345,14 +346,20 @@ class $FreezedSetCopyWith<E, $Res> {
     return this;
   }
 
-  /// Replaces all elements with elements from an [Iterable<E>].
-  void _replaceOf(Iterable<E> iterable) {
-    if (iterable is _FreezedSet<E> && iterable.setFactory == _setFactory) {
-      _withOwner(iterable);
-    } else {
-      _setSafeSet(_createSet()..addAll(iterable));
-    }
-  }
+  // /// Replaces all elements with elements from an [Iterable<E>].
+  // @pragma('vm:prefer-inline')
+  // $FreezedSetCopyWith<E, $Res> _replaceOf(Iterable<E> iterable) {
+  //   if (iterable is _FreezedSet<E> && iterable.setFactory == _setFactory) {
+  //     _withOwner(iterable);
+  //   } else {
+  //     if (iterable is _FreezedSet<E>) {
+  //       _setFactory = iterable.__setFactory;
+  //     }
+  //     _setSafeSet(_createSet()..addAll(iterable));
+  //   }
+  //
+  //   return this;
+  // }
 
   /// Uses `base` as the collection type for all sets created by this builder.
   ///
@@ -370,17 +377,22 @@ class $FreezedSetCopyWith<E, $Res> {
   /// same type.
   ///
   /// Use [withDefaultBase] to reset `base` to the default value.
-  void withBase($SetFactory<E> base) {
+  @pragma('vm:prefer-inline')
+  $FreezedSetCopyWith<E, $Res> withBase($SetFactory<E> base) {
     ArgumentError.checkNotNull(base, 'base');
     _setFactory = base;
     _setSafeSet(_createSet()..addAll(_set));
+
+    return this;
   }
 
   /// As [withBase], but sets `base` back to the default value, which
   /// instantiates `Set<E>`.
-  void withDefaultBase() {
+  @pragma('vm:prefer-inline')
+  $FreezedSetCopyWith<E, $Res> withDefaultBase() {
     _setFactory = null;
     _setSafeSet(_createSet()..addAll(_set));
+    return this;
   }
 
   // Based on Set.

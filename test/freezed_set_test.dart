@@ -9,6 +9,9 @@
 //dart pub global run coverage:test_with_coverage
 
 // dart pub global run coverage:test_with_coverage && cd coverage/ && genhtml lcov.info && cd ..
+import 'dart:collection';
+import 'dart:convert' show json;
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:freezed_collection/freezed_collection.dart';
 import 'package:test/test.dart';
@@ -207,7 +210,7 @@ void main() {
       expect(FreezedSet.of({1, 2, 3}).contains('1'), isFalse);
     });
 
-    test('has forEach', () {
+    test('has for-loop', () {
       var cnt = 0;
       for (final n in FreezedSet.of({1, 2, 3})) {
         cnt += n;
@@ -215,8 +218,225 @@ void main() {
       expect(cnt, equals(6));
     });
 
+    test('has forEach', () {
+      var cnt = 0;
+      // ignore: avoid_function_literals_in_foreach_calls
+      FreezedSet.of({1, 2, 3}).forEach((p0) => cnt += p0);
+
+      expect(cnt, equals(6));
+    });
+
     test('has reduce', () {
       expect(FreezedSet.of({1, 2, 3}).reduce((p0, p1) => p0 * p1), equals(6));
+    });
+
+    test('has fold', () {
+      expect(
+          FreezedSet.of({1, 2, 3}).fold(10, (p0, p1) => p0 * p1), equals(60));
+    });
+
+    test('has every', () {
+      expect(FreezedSet.of({1, 2, 3}).every((p0) => p0 < 0), isFalse);
+      expect(FreezedSet.of({1, 2, 3}).every((p0) => p0 > 0), isTrue);
+    });
+
+    test('has join', () {
+      expect(FreezedSet.of({1, 2, 3}).join(' '), equals('1 2 3'));
+    });
+
+    test('has any', () {
+      expect(FreezedSet.of({1, 2, '3'}).any((p0) => p0 is String), isTrue);
+      expect(FreezedSet.of({1, 2, 3}).any((p0) => p0 < 0), isFalse);
+    });
+
+    test('has update', () {
+      final s = Set.of({0});
+      FreezedSet.of({1, 2, 3}).copyWith.update((p0) => s.addAll(p0.seal()));
+
+      expect(s, equals({0, 1, 2, 3}));
+    });
+
+    test('has toList', () {
+      expect(FreezedSet.of({1, 2, 3}).toList(),
+          isA<List>().having((p0) => p0, 'elements', [1, 2, 3]));
+    });
+
+    test('has isEmpty', () {
+      expect(FreezedSet.of({1, 2, 3}).isEmpty, isFalse);
+      expect(FreezedSet.of({}).isEmpty, isTrue);
+      expect(FreezedSet.of({1, 2, 3}).isNotEmpty, isTrue);
+      expect(FreezedSet.of({}).isNotEmpty, isFalse);
+    });
+
+    test('has take', () {
+      expect(FreezedSet.of({1, 2, 3, 4, 5}).take(2), equals({1, 2}));
+    });
+
+    test('has takeWhile', () {
+      expect(FreezedSet.of({1, 2, 3, 4, 5}).takeWhile((p0) => p0 != 3),
+          equals({1, 2}));
+    });
+
+    test('has skip', () {
+      expect(FreezedSet.of({1, 2, 3, 4, 5}).skip(2), equals({3, 4, 5}));
+    });
+
+    test('has skipWhile', () {
+      expect(FreezedSet.of({1, 2, 3, 4, 5}).skipWhile((p0) => p0 != 3),
+          equals({3, 4, 5}));
+    });
+
+    test('has first', () {
+      expect(FreezedSet.of({1, 2, 3, 4, 5}).first, equals(1));
+    });
+
+    test('has last', () {
+      expect(FreezedSet.of({1, 2, 3, 4, 5}).last, equals(5));
+    });
+
+    test('has single', () {
+      expect(FreezedSet.of({1}).single, equals(1));
+      expect(() => FreezedSet.of({1, 2}).single, throwsStateError);
+      expect(() => FreezedSet.of({}).single, throwsStateError);
+    });
+
+    test('has firstWhere', () {
+      expect(FreezedSet.of({1, 2, 3}).firstWhere((p0) => p0 == 2), equals(2));
+      expect(() => FreezedSet.of({1, 2}).firstWhere((p0) => p0 == 100),
+          throwsStateError);
+    });
+
+    test('has lastWhere', () {
+      expect(
+          FreezedSet.of({1, 2, 3}).lastWhere((p0) => p0 % 2 == 1), equals(3));
+      expect(() => FreezedSet.of({1, 2}).lastWhere((p0) => p0 == 100),
+          throwsStateError);
+    });
+
+    test('has singleWhere', () {
+      expect(FreezedSet.of({1, 2, 3}).singleWhere((p0) => p0 == 2), equals(2));
+      expect(() => FreezedSet.of({1, 2}).singleWhere((p0) => p0 == 100),
+          throwsStateError);
+    });
+
+    test('has elementAt', () {
+      expect(FreezedSet.of({1, 2, 3}).elementAt(1), equals(2));
+      expect(() => FreezedSet.of({1, 2}).elementAt(100), throwsRangeError);
+    });
+
+    test('has fromJson', () {
+      expect(FreezedSet.fromJson(json.decode('[1, 2, 3]'), (p0) => p0),
+          equals({1, 2, 3}));
+    });
+
+    test('has toJson', () {
+      final s = json.encode(FreezedSet.of({1, 2, 3}).toJson());
+
+      expect(
+          FreezedSet.fromJson(json.decode(s), (p0) => p0), equals({1, 2, 3}));
+    });
+
+    test('has withBase', () {
+      final orig = FreezedSet.of({1, 3, 2, 4, 0});
+      final splay = orig.copyWith.withBase(() => SplayTreeSet()).seal();
+
+      expect(splay.toList(), equals([0, 1, 2, 3, 4]));
+    });
+
+    test('has withDefaultBase', () {
+      final orig = FreezedSet.of({1, 3, 2, 4, 0});
+      final splay = orig.copyWith.withBase(() => SplayTreeSet()).seal();
+      final def = splay.copyWith.withDefaultBase()..add(-1);
+
+      var $freezedSetCopyWith = splay.copyWith..add(-1);
+      final seal = ($freezedSetCopyWith).seal();
+
+      expect(seal.toList(), equals([-1, 0, 1, 2, 3, 4]));
+      expect(def.seal().toList(), equals([0, 1, 2, 3, 4, -1]));
+    });
+
+    test('has copyWith replace', () {
+      final freezedSet = FreezedSet.of({1, 2, 3});
+
+      expect(
+          () => freezedSet.copyWith.replace(['1']).seal(), throwsArgumentError);
+    });
+
+    test('has type error', () {
+      expect(() => FreezedSet<int>(['1']), throwsA(TypeMatcher<TypeError>()));
+    });
+
+    test('has copyWith length', () {
+      expect(FreezedSet.of({1, 2, 3}).copyWith.length, equals(3));
+    });
+
+    test('has copyWith isEmpty', () {
+      expect(FreezedSet.of({1, 2, 3}).copyWith.isEmpty, isFalse);
+      expect(FreezedSet.of({}).copyWith.isEmpty, isTrue);
+    });
+
+    test('has copyWith isNotEmpty', () {
+      expect(FreezedSet.of({1, 2, 3}).copyWith.isNotEmpty, isTrue);
+      expect(FreezedSet.of({}).copyWith.isNotEmpty, isFalse);
+    });
+
+    test('has copyWith removeAll', () {
+      expect(FreezedSet.of({1, 2, 3}).copyWith.removeAll({1}).seal(),
+          equals({2, 3}));
+    });
+
+    test('has copyWith retainAll', () {
+      expect(
+          FreezedSet.of({1, 2, 3}).copyWith.retainAll({1}).seal(), equals({1}));
+    });
+
+    test('has copyWith addAll', () {
+      expect(FreezedSet.of({1, 2, 3}).copyWith.addAll({4, 5}).seal(),
+          equals({1, 2, 3, 4, 5}));
+    });
+
+    test('has copyWith where', () {
+      expect(FreezedSet.of({1, 2, 3}).copyWith.where((p0) => p0 < 3).seal(),
+          equals({1, 2}));
+    });
+
+    test('has copyWith map', () {
+      expect(FreezedSet.of({1, 2, 3}).copyWith.map((p0) => p0 + 1).seal(),
+          equals({2, 3, 4}));
+    });
+
+    test('has copyWith expand', () {
+      expect(
+          FreezedSet.of({1, 2, 3})
+              .copyWith
+              .expand((p0) => {p0 * 10, p0 * 20})
+              .seal(),
+          equals({10, 20, 30, 40, 60}));
+    });
+
+    test('has copyWith take', () {
+      expect(FreezedSet.of({1, 2, 3}).copyWith.take(2).seal(), equals({1, 2}));
+    });
+
+    test('has copyWith takeWhile', () {
+      expect(
+          FreezedSet.of({1, 2, 3}).copyWith.takeWhile((p0) => p0 <= 2).seal(),
+          equals({1, 2}));
+    });
+
+    test('has copyWith skip', () {
+      expect(FreezedSet.of({1, 2, 3}).copyWith.skip(2).seal(), equals({3}));
+    });
+
+    test('has copyWith skipWhile', () {
+      expect(
+          FreezedSet.of({1, 2, 3})
+              .copyWith
+              .skipWhile(
+                (p0) => p0 <= 2,
+              )
+              .seal(),
+          equals({3}));
     });
   });
 }

@@ -265,8 +265,9 @@ class _FreezedList<E> extends FreezedList<E> {
 final class $FreezedListCopyWith<E, $Res> {
   /// Instantiates with elements from a [List] or [FreezedList].
   factory $FreezedListCopyWith(
-      FreezedList<E> value, $Res Function(FreezedList<E>) then) {
-    return $FreezedListCopyWith<E, $Res>._uninitialized(then)..replace(value);
+      FreezedList<E> iterable, $Res Function(FreezedList<E>) then) {
+    return $FreezedListCopyWith<E, $Res>._uninitialized(then)
+      ..replace(iterable);
   }
 
   final $Res Function(FreezedList<E>) _then;

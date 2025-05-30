@@ -271,6 +271,9 @@ final class $FreezedMapCopyWith<K, V, $Res> {
     if (map is _FreezedMap<K, V> && map.mapFactory == _mapFactory) {
       _setOwner(map);
     } else if (map is FreezedMap) {
+      if (map is _FreezedMap<K, V>) {
+        _mapFactory = map.mapFactory;
+      }
       final replacement = _createMap();
       map.forEach((dynamic key, dynamic value) {
         replacement[key as K] = value as V;
