@@ -3,8 +3,7 @@
 // license that can be found in the LICENSE file.
 
 /// Generates a hash code for multiple [objects].
-int hashObjects(Iterable objects) =>
-    _finish(objects.fold(0, (h, i) => _combine(h, i.hashCode)));
+int hashObjects(Iterable objects) => _finish(objects.fold(0, (h, i) => _combine(h, i.hashCode)));
 
 /// Generates a hash code for two objects.
 int hash2(a, b) => _finish(_combine(_combine(0, a.hashCode), b.hashCode));

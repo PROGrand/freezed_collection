@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2025. Vladimir E. Koltunov, mtbo.org
+ * Please see the AUTHORS file for details.
+ * All rights reserved. Use of this source code is governed by a BSD-style
+ * license that can be found in the LICENSE file.
+ */
+
 // ignore_for_file: override_on_non_overriding_member
 
 import 'dart:convert' show json;
@@ -49,7 +56,7 @@ abstract class FreezedMap<K, V> with _$FreezedMap {
   ///
   /// `K` and `V` are inferred from `map`.
   factory FreezedMap.of(Map<K, V> map) {
-    return _FreezedMap<K, V>.copyAndCheckForNull(map.keys, (k) => map[k] as V);
+    return _FreezedMap<K, V>.copy(map.keys, (k) => map[k] as V);
   }
 
   /// Returns as an immutable map.
@@ -87,14 +94,18 @@ abstract class FreezedMap<K, V> with _$FreezedMap {
   /// pairs in any order.
   @override
   bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    if (other is! FreezedMap) return false;
-    if (other.length != length) return false;
-    if (other.hashCode != hashCode) return false;
-    for (final key in keys) {
-      if (other[key] != this[key]) return false;
+    switch (other) {
+      case FreezedMap v when identical(v, this):
+        return true;
+      case FreezedMap v when v.length == length && v.hashCode == hashCode:
+        for (final key in keys) {
+          if (other[key] != this[key]) return false;
+        }
+        return true;
+
+      default:
+        return false;
     }
-    return true;
   }
 
   @override
@@ -165,8 +176,6 @@ abstract class FreezedMap<K, V> with _$FreezedMap {
 }
 
 mixin _$FreezedMap<K, V> {
-  late Map<K, V> _map;
-
   /// Create a copy of FreezedMap
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -174,23 +183,6 @@ mixin _$FreezedMap<K, V> {
   $FreezedMapCopyWith<K, V, FreezedMap<K, V>> get copyWith =>
       $FreezedMapCopyWith<K, V, FreezedMap<K, V>>(
           this as FreezedMap<K, V>, _$identity);
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is FreezedMap<K, V> &&
-            const DeepCollectionEquality().equals(other._map, _map));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_map));
-
-  @override
-  String toString() {
-    return 'FreezedMap<$K, $V>(_map: $_map)';
-  }
 }
 
 /// Default implementation of the public [FreezedMap] interface.
@@ -215,21 +207,34 @@ class _FreezedMap<K, V> extends FreezedMap<K, V> {
     }
   }
 
-  _FreezedMap.copyAndCheckForNull(Iterable<K> keys, V Function(K) lookup)
+  _FreezedMap.copy(Iterable<K> keys, V Function(K) lookup)
       : super._(null, <K, V>{}) {
-    final checkKeys = !isSoundMode && null is! K;
-    final checkValues = !isSoundMode && null is! V;
+    assert(isSoundMode, 'null safety is required');
+    // if (isSoundMode) {
     for (final key in keys) {
-      if (checkKeys && identical(key, null)) {
-        throw ArgumentError('map contained invalid key: null');
-      }
       final value = lookup(key);
-      if (checkValues && value == null) {
-        throw ArgumentError('map contained invalid value: null');
-      }
       _map[key] = value;
     }
+    // } else {
+    //   _FreezedMap.copyAndCheckForNull(keys, lookup);
+    // }
   }
+
+  // _FreezedMap.copyAndCheckForNull(Iterable<K> keys, V Function(K) lookup)
+  //     : super._(null, <K, V>{}) {
+  //   final checkKeys = null is! K;
+  //   final checkValues = null is! V;
+  //   for (final key in keys) {
+  //     if (checkKeys && identical(key, null)) {
+  //       throw ArgumentError('map contained invalid key: null');
+  //     }
+  //     final value = lookup(key);
+  //     if (checkValues && value == null) {
+  //       throw ArgumentError('map contained invalid value: null');
+  //     }
+  //     _map[key] = value;
+  //   }
+  // }
 
   bool hasExactKeyAndValueTypes(Type key, Type value) => K == key && V == value;
 }
@@ -360,8 +365,10 @@ class $FreezedMapCopyWith<K, V, $Res> {
   /// As [Map].
   @pragma('vm:prefer-inline')
   void operator []=(K key, V value) {
-    _checkKey(key);
-    _checkValue(value);
+    //sound mode
+    assert(isSoundMode);
+    // _checkKey(key);
+    // _checkValue(value);
     _safeMap[key] = value;
   }
 
@@ -378,10 +385,12 @@ class $FreezedMapCopyWith<K, V, $Res> {
   @pragma('vm:prefer-inline')
   @override
   $FreezedMapCopyWith<K, V, $Res> putIfAbsent(K key, V Function() ifAbsent) {
-    _checkKey(key);
+    assert(isSoundMode);
+    // _checkKey(key);
     _safeMap.putIfAbsent(key, () {
       final value = ifAbsent();
-      _checkValue(value);
+      assert(isSoundMode);
+      // _checkValue(value);
       return value;
     });
 
@@ -392,8 +401,9 @@ class $FreezedMapCopyWith<K, V, $Res> {
   @pragma('vm:prefer-inline')
   @override
   $FreezedMapCopyWith<K, V, $Res> addAll(Map<K, V> other) {
-    _checkKeys(other.keys);
-    _checkValues(other.values);
+    assert(isSoundMode);
+    // _checkKeys(other.keys);
+    // _checkValues(other.values);
     _safeMap.addAll(other);
     return this;
   }
@@ -474,44 +484,47 @@ class $FreezedMapCopyWith<K, V, $Res> {
 
   Map<K, V> _createMap() => _mapFactory != null ? _mapFactory!() : <K, V>{};
 
-  void _checkKey(K key) {
-    if (isSoundMode) return;
-    if (null is K) return;
-    if (identical(key, null)) {
-      throw ArgumentError('null key');
-    }
-  }
-
-  void _checkKeys(Iterable<K> keys) {
-    if (isSoundMode) return;
-    if (null is K) return;
-    for (final key in keys) {
-      _checkKey(key);
-    }
-  }
-
-  void _checkValue(V value) {
-    if (isSoundMode) return;
-    if (null is V) return;
-    if (identical(value, null)) {
-      throw ArgumentError('null value');
-    }
-  }
-
-  void _checkValues(Iterable<V> values) {
-    if (isSoundMode) return;
-    if (null is V) return;
-    for (final value in values) {
-      _checkValue(value);
-    }
-  }
+// assert(isSoundMode);
+// void _checkKey(K key) {
+//   if (isSoundMode) return;
+//   if (null is K) return;
+//   if (identical(key, null)) {
+//     throw ArgumentError('null key');
+//   }
+// }
+//
+//
+//
+// void _checkKeys(Iterable<K> keys) {
+//   if (isSoundMode) return;
+//   if (null is K) return;
+//   for (final key in keys) {
+//     _checkKey(key);
+//   }
+// }
+//
+// void _checkValue(V value) {
+//   if (isSoundMode) return;
+//   if (null is V) return;
+//   if (identical(value, null)) {
+//     throw ArgumentError('null value');
+//   }
+// }
+//
+// void _checkValues(Iterable<V> values) {
+//   if (isSoundMode) return;
+//   if (null is V) return;
+//   for (final value in values) {
+//     _checkValue(value);
+//   }
+// }
 /////////////////////////////////////////////
 }
 
 /// Extensions for [FreezedMap] on [Map].
 extension FreezedMapExtension<K, V> on Map<K, V> {
   /// Converts to a [FreezedMap].
-  FreezedMap<K, V> build() => FreezedMap<K, V>.of(this);
+  FreezedMap<K, V> seal() => FreezedMap<K, V>.of(this);
 }
 
 T _$identity<T>(T value) => value;

@@ -22,8 +22,7 @@ mixin _$One {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $OneCopyWith<One> get copyWith =>
-      _$OneCopyWithImpl<One>(this as One, _$identity);
+  $OneCopyWith<One> get copyWith => _$OneCopyWithImpl<One>(this as One, _$identity);
 
   /// Serializes this One to a JSON map.
   Map<String, dynamic> toJson();
@@ -110,8 +109,7 @@ class _One implements One {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$OneCopyWith<_One> get copyWith =>
-      __$OneCopyWithImpl<_One>(this, _$identity);
+  _$OneCopyWith<_One> get copyWith => __$OneCopyWithImpl<_One>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -141,8 +139,7 @@ class _One implements One {
 
 /// @nodoc
 abstract mixin class _$OneCopyWith<$Res> implements $OneCopyWith<$Res> {
-  factory _$OneCopyWith(_One value, $Res Function(_One) _then) =
-      __$OneCopyWithImpl;
+  factory _$OneCopyWith(_One value, $Res Function(_One) _then) = __$OneCopyWithImpl;
   @override
   @useResult
   $Res call({String name, Two two});
@@ -198,8 +195,7 @@ mixin _$Two {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $TwoCopyWith<Two> get copyWith =>
-      _$TwoCopyWithImpl<Two>(this as Two, _$identity);
+  $TwoCopyWith<Two> get copyWith => _$TwoCopyWithImpl<Two>(this as Two, _$identity);
 
   /// Serializes this Two to a JSON map.
   Map<String, dynamic> toJson();
@@ -286,8 +282,7 @@ class _Two implements Two {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$TwoCopyWith<_Two> get copyWith =>
-      __$TwoCopyWithImpl<_Two>(this, _$identity);
+  _$TwoCopyWith<_Two> get copyWith => __$TwoCopyWithImpl<_Two>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -317,8 +312,7 @@ class _Two implements Two {
 
 /// @nodoc
 abstract mixin class _$TwoCopyWith<$Res> implements $TwoCopyWith<$Res> {
-  factory _$TwoCopyWith(_Two value, $Res Function(_Two) _then) =
-      __$TwoCopyWithImpl;
+  factory _$TwoCopyWith(_Two value, $Res Function(_Two) _then) = __$TwoCopyWithImpl;
   @override
   @useResult
   $Res call({int index, FreezedMap<String, int> three});
@@ -361,6 +355,179 @@ class __$TwoCopyWithImpl<$Res> implements _$TwoCopyWith<$Res> {
   $FreezedMapCopyWith<String, int, $Res> get three {
     return $FreezedMapCopyWith<String, int, $Res>(_self.three, (value) {
       return _then(_self.copyWith(three: value));
+    });
+  }
+}
+
+/// @nodoc
+mixin _$IntMap {
+  int get index;
+  FreezedMap<int, int> get map;
+
+  /// Create a copy of IntMap
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $IntMapCopyWith<IntMap> get copyWith => _$IntMapCopyWithImpl<IntMap>(this as IntMap, _$identity);
+
+  /// Serializes this IntMap to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is IntMap &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.map, map) || other.map == map));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, index, map);
+
+  @override
+  String toString() {
+    return 'IntMap(index: $index, map: $map)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $IntMapCopyWith<$Res> {
+  factory $IntMapCopyWith(IntMap value, $Res Function(IntMap) _then) = _$IntMapCopyWithImpl;
+  @useResult
+  $Res call({int index, FreezedMap<int, int> map});
+
+  $FreezedMapCopyWith<int, int, $Res> get map;
+}
+
+/// @nodoc
+class _$IntMapCopyWithImpl<$Res> implements $IntMapCopyWith<$Res> {
+  _$IntMapCopyWithImpl(this._self, this._then);
+
+  final IntMap _self;
+  final $Res Function(IntMap) _then;
+
+  /// Create a copy of IntMap
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+    Object? map = null,
+  }) {
+    return _then(_self.copyWith(
+      index: null == index
+          ? _self.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+      map: null == map
+          ? _self.map
+          : map // ignore: cast_nullable_to_non_nullable
+              as FreezedMap<int, int>,
+    ));
+  }
+
+  /// Create a copy of IntMap
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FreezedMapCopyWith<int, int, $Res> get map {
+    return $FreezedMapCopyWith<int, int, $Res>(_self.map, (value) {
+      return _then(_self.copyWith(map: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _IntMap implements IntMap {
+  const _IntMap(this.index, this.map);
+  factory _IntMap.fromJson(Map<String, dynamic> json) => _$IntMapFromJson(json);
+
+  @override
+  final int index;
+  @override
+  final FreezedMap<int, int> map;
+
+  /// Create a copy of IntMap
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$IntMapCopyWith<_IntMap> get copyWith => __$IntMapCopyWithImpl<_IntMap>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$IntMapToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _IntMap &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.map, map) || other.map == map));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, index, map);
+
+  @override
+  String toString() {
+    return 'IntMap(index: $index, map: $map)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$IntMapCopyWith<$Res> implements $IntMapCopyWith<$Res> {
+  factory _$IntMapCopyWith(_IntMap value, $Res Function(_IntMap) _then) = __$IntMapCopyWithImpl;
+  @override
+  @useResult
+  $Res call({int index, FreezedMap<int, int> map});
+
+  @override
+  $FreezedMapCopyWith<int, int, $Res> get map;
+}
+
+/// @nodoc
+class __$IntMapCopyWithImpl<$Res> implements _$IntMapCopyWith<$Res> {
+  __$IntMapCopyWithImpl(this._self, this._then);
+
+  final _IntMap _self;
+  final $Res Function(_IntMap) _then;
+
+  /// Create a copy of IntMap
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? index = null,
+    Object? map = null,
+  }) {
+    return _then(_IntMap(
+      null == index
+          ? _self.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == map
+          ? _self.map
+          : map // ignore: cast_nullable_to_non_nullable
+              as FreezedMap<int, int>,
+    ));
+  }
+
+  /// Create a copy of IntMap
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FreezedMapCopyWith<int, int, $Res> get map {
+    return $FreezedMapCopyWith<int, int, $Res>(_self.map, (value) {
+      return _then(_self.copyWith(map: value));
     });
   }
 }

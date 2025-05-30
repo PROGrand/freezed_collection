@@ -3,11 +3,7 @@ import 'dart:math' show Random;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:freezed_collection/src/internal/copy_on_write_list.dart';
 
-@Freezed(
-    genericArgumentFactories: true,
-    toJson: false,
-    fromJson: false,
-    copyWith: true)
+@Freezed(genericArgumentFactories: true, toJson: false, fromJson: false, copyWith: true)
 class FreezedList<T> with _$FreezedList<T> implements Iterable<T> {
   const FreezedList([this.list = const []]);
 
@@ -35,8 +31,7 @@ class FreezedList<T> with _$FreezedList<T> implements Iterable<T> {
   T operator [](int index) => list[index];
 
   /// As [List.+].
-  FreezedList<T> operator +(FreezedList<T> other) =>
-      FreezedList<T>(list + other.list);
+  FreezedList<T> operator +(FreezedList<T> other) => FreezedList<T>(list + other.list);
 
   /// As [List.length].
   @override
@@ -52,16 +47,13 @@ class FreezedList<T> with _$FreezedList<T> implements Iterable<T> {
   int lastIndexOf(T element, [int? start]) => list.lastIndexOf(element, start);
 
   /// As [List.indexWhere].
-  int indexWhere(bool Function(T) test, [int start = 0]) =>
-      list.indexWhere(test, start);
+  int indexWhere(bool Function(T) test, [int start = 0]) => list.indexWhere(test, start);
 
   /// As [List.lastIndexWhere].
-  int lastIndexWhere(bool Function(T) test, [int? start]) =>
-      list.lastIndexWhere(test, start);
+  int lastIndexWhere(bool Function(T) test, [int? start]) => list.lastIndexWhere(test, start);
 
   /// As [List.sublist] but returns a `FreezedList<T>`.
-  FreezedList<T> sublist(int start, [int? end]) =>
-      FreezedList<T>(list.sublist(start, end));
+  FreezedList<T> sublist(int start, [int? end]) => FreezedList<T>(list.sublist(start, end));
 
   /// As [List.getRange].
   Iterable<T> getRange(int start, int end) => list.getRange(start, end);
@@ -97,8 +89,7 @@ class FreezedList<T> with _$FreezedList<T> implements Iterable<T> {
   T reduce(T Function(T, T) combine) => list.reduce(combine);
 
   @override
-  E fold<E>(E initialValue, E Function(E, T) combine) =>
-      list.fold(initialValue, combine);
+  E fold<E>(E initialValue, E Function(E, T) combine) => list.fold(initialValue, combine);
 
   @override
   Iterable<T> followedBy(Iterable<T> other) => list.followedBy(other);
@@ -173,8 +164,7 @@ class FreezedList<T> with _$FreezedList<T> implements Iterable<T> {
 
   //endregion
 
-  factory FreezedList.fromJson(
-          List<dynamic> json, T Function(Object?) fromJsonT) =>
+  factory FreezedList.fromJson(List<dynamic> json, T Function(Object?) fromJsonT) =>
       FreezedList(json.map(fromJsonT).toList());
 
   List<dynamic> toJson() => list.map((e) => e).toList();
@@ -196,8 +186,7 @@ mixin _$FreezedList<T> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
   $FreezedListCopyWith<T, FreezedList<T>> get copyWith =>
-      _$FreezedListCopyWithImpl<T, FreezedList<T>>(
-          this as FreezedList<T>, _$identity);
+      _$FreezedListCopyWithImpl<T, FreezedList<T>>(this as FreezedList<T>, _$identity);
 
   @override
   bool operator ==(Object other) {
@@ -208,14 +197,12 @@ mixin _$FreezedList<T> {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(list));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(list));
 }
 
 /// @nodoc
 abstract mixin class $FreezedListCopyWith<T, $Res> {
-  factory $FreezedListCopyWith(
-          FreezedList<T> value, $Res Function(FreezedList<T>) then) =
+  factory $FreezedListCopyWith(FreezedList<T> value, $Res Function(FreezedList<T>) then) =
       _$FreezedListCopyWithImpl;
 
   @useResult
@@ -292,8 +279,7 @@ abstract mixin class $FreezedListCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class _$FreezedListCopyWithImpl<T, $Res>
-    implements $FreezedListCopyWith<T, $Res> {
+class _$FreezedListCopyWithImpl<T, $Res> implements $FreezedListCopyWith<T, $Res> {
   _$FreezedListCopyWithImpl(this._self, this._then);
 
   final FreezedList<T> _self;

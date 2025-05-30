@@ -22,8 +22,7 @@ mixin _$One {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $OneCopyWith<One> get copyWith =>
-      _$OneCopyWithImpl<One>(this as One, _$identity);
+  $OneCopyWith<One> get copyWith => _$OneCopyWithImpl<One>(this as One, _$identity);
 
   /// Serializes this One to a JSON map.
   Map<String, dynamic> toJson();
@@ -110,8 +109,7 @@ class _One implements One {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$OneCopyWith<_One> get copyWith =>
-      __$OneCopyWithImpl<_One>(this, _$identity);
+  _$OneCopyWith<_One> get copyWith => __$OneCopyWithImpl<_One>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -141,8 +139,7 @@ class _One implements One {
 
 /// @nodoc
 abstract mixin class _$OneCopyWith<$Res> implements $OneCopyWith<$Res> {
-  factory _$OneCopyWith(_One value, $Res Function(_One) _then) =
-      __$OneCopyWithImpl;
+  factory _$OneCopyWith(_One value, $Res Function(_One) _then) = __$OneCopyWithImpl;
   @override
   @useResult
   $Res call({String name, Two two});
@@ -198,8 +195,7 @@ mixin _$Two {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $TwoCopyWith<Two> get copyWith =>
-      _$TwoCopyWithImpl<Two>(this as Two, _$identity);
+  $TwoCopyWith<Two> get copyWith => _$TwoCopyWithImpl<Two>(this as Two, _$identity);
 
   /// Serializes this Two to a JSON map.
   Map<String, dynamic> toJson();
@@ -215,8 +211,7 @@ mixin _$Two {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, name, const DeepCollectionEquality().hash(threes));
+  int get hashCode => Object.hash(runtimeType, name, const DeepCollectionEquality().hash(threes));
 
   @override
   String toString() {
@@ -287,8 +282,7 @@ class _Two implements Two {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$TwoCopyWith<_Two> get copyWith =>
-      __$TwoCopyWithImpl<_Two>(this, _$identity);
+  _$TwoCopyWith<_Two> get copyWith => __$TwoCopyWithImpl<_Two>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -308,8 +302,7 @@ class _Two implements Two {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, name, const DeepCollectionEquality().hash(threes));
+  int get hashCode => Object.hash(runtimeType, name, const DeepCollectionEquality().hash(threes));
 
   @override
   String toString() {
@@ -319,8 +312,7 @@ class _Two implements Two {
 
 /// @nodoc
 abstract mixin class _$TwoCopyWith<$Res> implements $TwoCopyWith<$Res> {
-  factory _$TwoCopyWith(_Two value, $Res Function(_Two) _then) =
-      __$TwoCopyWithImpl;
+  factory _$TwoCopyWith(_Two value, $Res Function(_Two) _then) = __$TwoCopyWithImpl;
   @override
   @useResult
   $Res call({String name, FreezedList<Three> threes});
@@ -375,8 +367,7 @@ mixin _$Three {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $ThreeCopyWith<Three> get copyWith =>
-      _$ThreeCopyWithImpl<Three>(this as Three, _$identity);
+  $ThreeCopyWith<Three> get copyWith => _$ThreeCopyWithImpl<Three>(this as Three, _$identity);
 
   /// Serializes this Three to a JSON map.
   Map<String, dynamic> toJson();
@@ -401,8 +392,7 @@ mixin _$Three {
 
 /// @nodoc
 abstract mixin class $ThreeCopyWith<$Res> {
-  factory $ThreeCopyWith(Three value, $Res Function(Three) _then) =
-      _$ThreeCopyWithImpl;
+  factory $ThreeCopyWith(Three value, $Res Function(Three) _then) = _$ThreeCopyWithImpl;
   @useResult
   $Res call({String name});
 }
@@ -444,8 +434,7 @@ class _Three implements Three {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$ThreeCopyWith<_Three> get copyWith =>
-      __$ThreeCopyWithImpl<_Three>(this, _$identity);
+  _$ThreeCopyWith<_Three> get copyWith => __$ThreeCopyWithImpl<_Three>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -474,8 +463,7 @@ class _Three implements Three {
 
 /// @nodoc
 abstract mixin class _$ThreeCopyWith<$Res> implements $ThreeCopyWith<$Res> {
-  factory _$ThreeCopyWith(_Three value, $Res Function(_Three) _then) =
-      __$ThreeCopyWithImpl;
+  factory _$ThreeCopyWith(_Three value, $Res Function(_Three) _then) = __$ThreeCopyWithImpl;
   @override
   @useResult
   $Res call({String name});
@@ -528,8 +516,7 @@ mixin _$Collector {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(numbers));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(numbers));
 
   @override
   String toString() {
@@ -584,8 +571,7 @@ class _$CollectorCopyWithImpl<$Res> implements $CollectorCopyWith<$Res> {
 @JsonSerializable()
 class _Collector implements Collector {
   const _Collector(this.numbers);
-  factory _Collector.fromJson(Map<String, dynamic> json) =>
-      _$CollectorFromJson(json);
+  factory _Collector.fromJson(Map<String, dynamic> json) => _$CollectorFromJson(json);
 
   @override
   final FreezedList<Numbers> numbers;
@@ -615,8 +601,7 @@ class _Collector implements Collector {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(numbers));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(numbers));
 
   @override
   String toString() {
@@ -625,10 +610,8 @@ class _Collector implements Collector {
 }
 
 /// @nodoc
-abstract mixin class _$CollectorCopyWith<$Res>
-    implements $CollectorCopyWith<$Res> {
-  factory _$CollectorCopyWith(
-          _Collector value, $Res Function(_Collector) _then) =
+abstract mixin class _$CollectorCopyWith<$Res> implements $CollectorCopyWith<$Res> {
+  factory _$CollectorCopyWith(_Collector value, $Res Function(_Collector) _then) =
       __$CollectorCopyWithImpl;
   @override
   @useResult
@@ -695,8 +678,7 @@ mixin _$Numbers {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(values));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(values));
 
   @override
   String toString() {
@@ -706,8 +688,7 @@ mixin _$Numbers {
 
 /// @nodoc
 abstract mixin class $NumbersCopyWith<$Res> {
-  factory $NumbersCopyWith(Numbers value, $Res Function(Numbers) _then) =
-      _$NumbersCopyWithImpl;
+  factory $NumbersCopyWith(Numbers value, $Res Function(Numbers) _then) = _$NumbersCopyWithImpl;
   @useResult
   $Res call({FreezedList<int> values});
 
@@ -751,8 +732,7 @@ class _$NumbersCopyWithImpl<$Res> implements $NumbersCopyWith<$Res> {
 @JsonSerializable()
 class _Numbers implements Numbers {
   const _Numbers(this.values);
-  factory _Numbers.fromJson(Map<String, dynamic> json) =>
-      _$NumbersFromJson(json);
+  factory _Numbers.fromJson(Map<String, dynamic> json) => _$NumbersFromJson(json);
 
   @override
   final FreezedList<int> values;
@@ -762,8 +742,7 @@ class _Numbers implements Numbers {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$NumbersCopyWith<_Numbers> get copyWith =>
-      __$NumbersCopyWithImpl<_Numbers>(this, _$identity);
+  _$NumbersCopyWith<_Numbers> get copyWith => __$NumbersCopyWithImpl<_Numbers>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -782,8 +761,7 @@ class _Numbers implements Numbers {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(values));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(values));
 
   @override
   String toString() {
@@ -793,8 +771,7 @@ class _Numbers implements Numbers {
 
 /// @nodoc
 abstract mixin class _$NumbersCopyWith<$Res> implements $NumbersCopyWith<$Res> {
-  factory _$NumbersCopyWith(_Numbers value, $Res Function(_Numbers) _then) =
-      __$NumbersCopyWithImpl;
+  factory _$NumbersCopyWith(_Numbers value, $Res Function(_Numbers) _then) = __$NumbersCopyWithImpl;
   @override
   @useResult
   $Res call({FreezedList<int> values});

@@ -8,10 +8,7 @@ part 'director.g.dart';
 
 @freezed
 abstract class Director with _$Director {
-  factory Director(
-      {String? name,
-      required FreezedMap<int, Assistant> assistants}) = _Director;
+  factory Director({String? name, required FreezedMap<int, Assistant> assistants}) = _Director;
 
-  factory Director.fromJson(Map<String, dynamic> json) =>
-      _$DirectorFromJson(json);
+  factory Director.fromJson(Map<String, dynamic> json) => _$DirectorFromJson(json);
 }

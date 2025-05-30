@@ -34,16 +34,14 @@ abstract class Three with _$Three {
 abstract class Collector with _$Collector {
   const factory Collector(FreezedList<Numbers> numbers) = _Collector;
 
-  factory Collector.fromJson(Map<String, dynamic> json) =>
-      _$CollectorFromJson(json);
+  factory Collector.fromJson(Map<String, dynamic> json) => _$CollectorFromJson(json);
 }
 
 @freezed
 abstract class Numbers with _$Numbers {
   const factory Numbers(FreezedList<int> values) = _Numbers;
 
-  factory Numbers.fromJson(Map<String, dynamic> json) =>
-      _$NumbersFromJson(json);
+  factory Numbers.fromJson(Map<String, dynamic> json) => _$NumbersFromJson(json);
 }
 
 void main() {
@@ -59,20 +57,16 @@ void main() {
     });
 
     test('FreezedList has deep copyWith', () {
-      final one = One(
-          '1', Two('2', FreezedList([Three('31'), Three('32'), Three('31')])));
+      final one = One('1', Two('2', FreezedList([Three('31'), Three('32'), Three('31')])));
 
-      final abc =
-          one.copyWith.two.threes(list: [Three('a'), Three('b'), Three('c')]);
+      final abc = one.copyWith.two.threes(list: [Three('a'), Three('b'), Three('c')]);
 
       expect(abc.two.threes.map((p0) => p0.name), equals(['a', 'b', 'c']));
     });
 
     test('Freezed Test', () {
-      final one1 = One(
-          '1', Two('2', FreezedList([Three('31'), Three('32'), Three('33')])));
-      final one2 = One(
-          '1', Two('2', FreezedList([Three('31'), Three('32'), Three('33')])));
+      final one1 = One('1', Two('2', FreezedList([Three('31'), Three('32'), Three('33')])));
+      final one2 = One('1', Two('2', FreezedList([Three('31'), Three('32'), Three('33')])));
       final one2copy = one2.copyWith();
       expect(one1, equals(one2));
       expect(one1, equals(one2copy));
@@ -160,16 +154,14 @@ void main() {
   group('FreezedList', () {
     test('has replaceFirstWhere', () {
       final list = FreezedList([1, 2, 1]);
-      final list2 =
-          list.copyWith.replaceFirstWhere(0, (element) => element == 1);
+      final list2 = list.copyWith.replaceFirstWhere(0, (element) => element == 1);
 
       expect(list2, equals([0, 2, 1]));
     });
 
     test('has replaceFirstWhere -1', () {
       final list = FreezedList([1, 2, 1]);
-      final list2 =
-          list.copyWith.replaceFirstWhere(0, (element) => element == 7);
+      final list2 = list.copyWith.replaceFirstWhere(0, (element) => element == 7);
 
       expect(list2, equals([1, 2, 1]));
     });

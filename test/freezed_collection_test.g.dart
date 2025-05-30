@@ -42,14 +42,12 @@ _Collector _$CollectorFromJson(Map<String, dynamic> json) => _Collector(
           (value) => Numbers.fromJson(value as Map<String, dynamic>)),
     );
 
-Map<String, dynamic> _$CollectorToJson(_Collector instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$CollectorToJson(_Collector instance) => <String, dynamic>{
       'numbers': instance.numbers,
     };
 
 _Numbers _$NumbersFromJson(Map<String, dynamic> json) => _Numbers(
-      FreezedList<int>.fromJson(
-          json['values'] as List<dynamic>, (value) => (value as num).toInt()),
+      FreezedList<int>.fromJson(json['values'] as List<dynamic>, (value) => (value as num).toInt()),
     );
 
 Map<String, dynamic> _$NumbersToJson(_Numbers instance) => <String, dynamic>{
