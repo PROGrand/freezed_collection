@@ -1,3 +1,7 @@
+## 2.1.2-pre1
+
+- FreezedSet added
+
 ## 2.1.1-pre1
 
 - FreezedList added

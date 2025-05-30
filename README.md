@@ -6,7 +6,7 @@ Extending dart `Freezed` collection with deep `copyWith`.
 
 ```yaml
 dependencies:
-  freezed_collection: ^2.1.1-pre1
+  freezed_collection: ^2.1.2-pre1
 ```
 
 ## Status
