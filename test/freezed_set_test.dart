@@ -100,6 +100,10 @@ void main() {
 
       expect(list, equals({1, 2, 3}));
       expect(list2, equals([1, 2, 3, 4, 5]));
+
+      final list3 = FreezedSet({7, 8});
+      expect(
+          list2.copyWith.addAll(list3).seal(), equals({1, 2, 3, 4, 5, 7, 8}));
     });
 
     test('has clear', () {

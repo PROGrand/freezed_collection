@@ -307,8 +307,11 @@ class $FreezedSetCopyWith<E, $Res> {
   }
 
   /// Applies a function to `this`.
-  void update(Function($FreezedSetCopyWith<E, $Res>) updates) {
+  @pragma('vm:prefer-inline')
+  $FreezedSetCopyWith<E, $Res> update(
+      Function($FreezedSetCopyWith<E, $Res>) updates) {
     updates(this);
+    return this;
   }
 
   @pragma('vm:prefer-inline')
@@ -387,8 +390,10 @@ class $FreezedSetCopyWith<E, $Res> {
   bool get isNotEmpty => _set.isNotEmpty;
 
   /// As [Set.add].
-  bool add(E value) {
-    return _safeSet.add(value);
+  @pragma('vm:prefer-inline')
+  $FreezedSetCopyWith<E, $Res> add(E value) {
+    _safeSet.add(value);
+    return this;
   }
 
   /// As [Set.addAll].
@@ -407,7 +412,11 @@ class $FreezedSetCopyWith<E, $Res> {
   }
 
   /// As [Set.remove].
-  bool remove(Object? value) => _safeSet.remove(value);
+  @pragma('vm:prefer-inline')
+  $FreezedSetCopyWith<E, $Res> remove(Object? value) {
+    _safeSet.remove(value);
+    return this;
+  }
 
   /// As [Set.removeAll].
   @pragma('vm:prefer-inline')

@@ -456,42 +456,6 @@ final class $FreezedMapCopyWith<K, V, $Res> {
   }
 
   Map<K, V> _createMap() => _mapFactory != null ? _mapFactory!() : <K, V>{};
-
-// assert(isSoundMode);
-// void _checkKey(K key) {
-//   if (isSoundMode) return;
-//   if (null is K) return;
-//   if (identical(key, null)) {
-//     throw ArgumentError('null key');
-//   }
-// }
-//
-//
-//
-// void _checkKeys(Iterable<K> keys) {
-//   if (isSoundMode) return;
-//   if (null is K) return;
-//   for (final key in keys) {
-//     _checkKey(key);
-//   }
-// }
-//
-// void _checkValue(V value) {
-//   if (isSoundMode) return;
-//   if (null is V) return;
-//   if (identical(value, null)) {
-//     throw ArgumentError('null value');
-//   }
-// }
-//
-// void _checkValues(Iterable<V> values) {
-//   if (isSoundMode) return;
-//   if (null is V) return;
-//   for (final value in values) {
-//     _checkValue(value);
-//   }
-// }
-/////////////////////////////////////////////
 }
 
 /// Extensions for [FreezedMap] on [Map].

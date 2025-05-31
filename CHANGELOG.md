@@ -1,3 +1,7 @@
+## 2.1.5
+
+- chaining of collection operators forced to return `this`.
+
 ## 2.1.4+1
 
 - FreezedSet added

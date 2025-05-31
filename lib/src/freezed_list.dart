@@ -335,6 +335,12 @@ final class $FreezedListCopyWith<E, $Res> {
   @pragma('vm:prefer-inline')
   set first(E value) => _safeList.first = value;
 
+  @pragma('vm:prefer-inline')
+  $FreezedListCopyWith<E, $Res> setFirst(E value) {
+    _safeList.first = value;
+    return this;
+  }
+
   /// As [List.last].
   @pragma('vm:prefer-inline')
   E get last => _list.last;
@@ -343,12 +349,25 @@ final class $FreezedListCopyWith<E, $Res> {
   @pragma('vm:prefer-inline')
   set last(E value) => _safeList.last = value;
 
+  /// As [List.last].
+  @pragma('vm:prefer-inline')
+  $FreezedListCopyWith<E, $Res> setLast(E value) {
+    _safeList.last = value;
+    return this;
+  }
+
   /// As [List.length].
   @pragma('vm:prefer-inline')
   int get length => _list.length;
 
   @pragma('vm:prefer-inline')
   set length(int value) => _safeList.length = value;
+
+  @pragma('vm:prefer-inline')
+  $FreezedListCopyWith<E, $Res> setLength(int value) {
+    _safeList.length = value;
+    return this;
+  }
 
   /// As [List.isEmpty].
   @pragma('vm:prefer-inline')
@@ -403,24 +422,6 @@ final class $FreezedListCopyWith<E, $Res> {
     return this;
   }
 
-  @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<E, $Res> setLast(E value) {
-    _safeList.last = value;
-    return this;
-  }
-
-  @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<E, $Res> setLength(int newLength) {
-    _safeList.length = newLength;
-    return this;
-  }
-
-  @pragma('vm:prefer-inline')
-  $FreezedListCopyWith<E, $Res> setFirst(E value) {
-    _safeList.first = value;
-    return this;
-  }
-
   /// As [List.sort].
   @pragma('vm:prefer-inline')
   $FreezedListCopyWith<E, $Res> sort([int Function(E, E)? compare]) {
@@ -469,15 +470,26 @@ final class $FreezedListCopyWith<E, $Res> {
 
   /// As [List.remove].
   @pragma('vm:prefer-inline')
-  bool remove(Object? value) => _safeList.remove(value);
+  $FreezedListCopyWith<E, $Res> remove(Object? value) {
+    _safeList.remove(value);
+    return this;
+  }
 
   /// As [List.removeAt].
   @pragma('vm:prefer-inline')
-  E removeAt(int index) => _safeList.removeAt(index);
+  @pragma('vm:prefer-inline')
+  $FreezedListCopyWith<E, $Res> removeAt(int index) {
+    _safeList.removeAt(index);
+    return this;
+  }
 
   /// As [List.removeLast].
   @pragma('vm:prefer-inline')
-  E removeLast() => _safeList.removeLast();
+  @pragma('vm:prefer-inline')
+  $FreezedListCopyWith<E, $Res> removeLast() {
+    _safeList.removeLast();
+    return this;
+  }
 
   /// As [List.removeWhere].
   @pragma('vm:prefer-inline')
