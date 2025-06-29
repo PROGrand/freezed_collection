@@ -63,7 +63,7 @@ void main() {
           '1', Two('2', FreezedSet([Three('31'), Three('32'), Three('31')])));
 
       final abc =
-          one.copyWith.two.threes([Three('a'), Three('b'), Three('c')]).seal();
+          one.copyWith.two.threes([Three('a'), Three('b'), Three('c')]).build();
 
       expect(abc.two.threes.map((p0) => p0.name), equals(['a', 'b', 'c']));
     });
@@ -72,7 +72,7 @@ void main() {
   group('FreezedSet', () {
     test('has call', () {
       final list = FreezedSet({1, 2});
-      final list2 = list.copyWith({4, 5}).seal();
+      final list2 = list.copyWith({4, 5}).build();
 
       expect(list, equals({1, 2}));
       expect(list2, equals({4, 5}));
@@ -80,7 +80,7 @@ void main() {
 
     test('has call with null', () {
       final list = FreezedSet({1, 2});
-      final list2 = list.copyWith({}).seal();
+      final list2 = list.copyWith({}).build();
 
       expect(list, equals({1, 2}));
       expect(list2, equals(<int>{}));
@@ -91,24 +91,24 @@ void main() {
       final list2 = list.copyWith..add(3);
 
       expect(list, equals({1, 2}));
-      expect(list2.seal(), equals({1, 2, 3}));
+      expect(list2.build(), equals({1, 2, 3}));
     });
 
     test('has addAll', () {
       final list = FreezedSet({1, 2, 3});
-      final list2 = list.copyWith.addAll({4, 5}).seal();
+      final list2 = list.copyWith.addAll({4, 5}).build();
 
       expect(list, equals({1, 2, 3}));
       expect(list2, equals([1, 2, 3, 4, 5]));
 
       final list3 = FreezedSet({7, 8});
       expect(
-          list2.copyWith.addAll(list3).seal(), equals({1, 2, 3, 4, 5, 7, 8}));
+          list2.copyWith.addAll(list3).build(), equals({1, 2, 3, 4, 5, 7, 8}));
     });
 
     test('has clear', () {
       final list = FreezedSet({1, 2, 3});
-      final list2 = list.copyWith.clear().seal();
+      final list2 = list.copyWith.clear().build();
 
       expect(list, equals({1, 2, 3}));
       expect(list2, equals([]));
@@ -116,7 +116,7 @@ void main() {
 
     test('has remove', () {
       final list = FreezedSet({1, 2, 3});
-      final list2 = (list.copyWith..remove(2)).seal();
+      final list2 = (list.copyWith..remove(2)).build();
 
       expect(list, equals({1, 2, 3}));
       expect(list2, equals({1, 3}));
@@ -124,7 +124,8 @@ void main() {
 
     test('has removeWhere', () {
       final list = FreezedSet({1, 2});
-      final list2 = list.copyWith.removeWhere((element) => element == 1).seal();
+      final list2 =
+          list.copyWith.removeWhere((element) => element == 1).build();
 
       expect(list, equals({1, 2}));
       expect(list2, equals({2}));
@@ -132,7 +133,8 @@ void main() {
 
     test('has retainWhere', () {
       final list = FreezedSet({1, 2});
-      final list2 = list.copyWith.retainWhere((element) => element == 2).seal();
+      final list2 =
+          list.copyWith.retainWhere((element) => element == 2).build();
 
       expect(list, equals({1, 2}));
       expect(list2, equals({2}));
@@ -255,7 +257,7 @@ void main() {
 
     test('has update', () {
       final s = Set.of({0});
-      FreezedSet.of({1, 2, 3}).copyWith.update((p0) => s.addAll(p0.seal()));
+      FreezedSet.of({1, 2, 3}).copyWith.update((p0) => s.addAll(p0.build()));
 
       expect(s, equals({0, 1, 2, 3}));
     });
@@ -342,28 +344,28 @@ void main() {
 
     test('has withBase', () {
       final orig = FreezedSet.of({1, 3, 2, 4, 0});
-      final splay = orig.copyWith.withBase(() => SplayTreeSet()).seal();
+      final splay = orig.copyWith.withBase(() => SplayTreeSet()).build();
 
       expect(splay.toList(), equals([0, 1, 2, 3, 4]));
     });
 
     test('has withDefaultBase', () {
       final orig = FreezedSet.of({1, 3, 2, 4, 0});
-      final splay = orig.copyWith.withBase(() => SplayTreeSet()).seal();
+      final splay = orig.copyWith.withBase(() => SplayTreeSet()).build();
       final def = splay.copyWith.withDefaultBase()..add(-1);
 
       var $freezedSetCopyWith = splay.copyWith..add(-1);
-      final seal = ($freezedSetCopyWith).seal();
+      final seal = ($freezedSetCopyWith).build();
 
       expect(seal.toList(), equals([-1, 0, 1, 2, 3, 4]));
-      expect(def.seal().toList(), equals([0, 1, 2, 3, 4, -1]));
+      expect(def.build().toList(), equals([0, 1, 2, 3, 4, -1]));
     });
 
     test('has copyWith replace', () {
       final freezedSet = FreezedSet.of({1, 2, 3});
 
-      expect(
-          () => freezedSet.copyWith.replace(['1']).seal(), throwsArgumentError);
+      expect(() => freezedSet.copyWith.replace(['1']).build(),
+          throwsArgumentError);
     });
 
     test('has type error', () {
@@ -385,27 +387,27 @@ void main() {
     });
 
     test('has copyWith removeAll', () {
-      expect(FreezedSet.of({1, 2, 3}).copyWith.removeAll({1}).seal(),
+      expect(FreezedSet.of({1, 2, 3}).copyWith.removeAll({1}).build(),
           equals({2, 3}));
     });
 
     test('has copyWith retainAll', () {
-      expect(
-          FreezedSet.of({1, 2, 3}).copyWith.retainAll({1}).seal(), equals({1}));
+      expect(FreezedSet.of({1, 2, 3}).copyWith.retainAll({1}).build(),
+          equals({1}));
     });
 
     test('has copyWith addAll', () {
-      expect(FreezedSet.of({1, 2, 3}).copyWith.addAll({4, 5}).seal(),
+      expect(FreezedSet.of({1, 2, 3}).copyWith.addAll({4, 5}).build(),
           equals({1, 2, 3, 4, 5}));
     });
 
     test('has copyWith where', () {
-      expect(FreezedSet.of({1, 2, 3}).copyWith.where((p0) => p0 < 3).seal(),
+      expect(FreezedSet.of({1, 2, 3}).copyWith.where((p0) => p0 < 3).build(),
           equals({1, 2}));
     });
 
     test('has copyWith map', () {
-      expect(FreezedSet.of({1, 2, 3}).copyWith.map((p0) => p0 + 1).seal(),
+      expect(FreezedSet.of({1, 2, 3}).copyWith.map((p0) => p0 + 1).build(),
           equals({2, 3, 4}));
     });
 
@@ -414,22 +416,22 @@ void main() {
           FreezedSet.of({1, 2, 3})
               .copyWith
               .expand((p0) => {p0 * 10, p0 * 20})
-              .seal(),
+              .build(),
           equals({10, 20, 30, 40, 60}));
     });
 
     test('has copyWith take', () {
-      expect(FreezedSet.of({1, 2, 3}).copyWith.take(2).seal(), equals({1, 2}));
+      expect(FreezedSet.of({1, 2, 3}).copyWith.take(2).build(), equals({1, 2}));
     });
 
     test('has copyWith takeWhile', () {
       expect(
-          FreezedSet.of({1, 2, 3}).copyWith.takeWhile((p0) => p0 <= 2).seal(),
+          FreezedSet.of({1, 2, 3}).copyWith.takeWhile((p0) => p0 <= 2).build(),
           equals({1, 2}));
     });
 
     test('has copyWith skip', () {
-      expect(FreezedSet.of({1, 2, 3}).copyWith.skip(2).seal(), equals({3}));
+      expect(FreezedSet.of({1, 2, 3}).copyWith.skip(2).build(), equals({3}));
     });
 
     test('has copyWith skipWhile', () {
@@ -439,7 +441,7 @@ void main() {
               .skipWhile(
                 (p0) => p0 <= 2,
               )
-              .seal(),
+              .build(),
           equals({3}));
     });
   });

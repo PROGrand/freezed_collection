@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: type=lint
-
 part of 'assistant.dart';
 
 // **************************************************************************
@@ -13,7 +11,8 @@ _Assistant _$AssistantFromJson(Map<String, dynamic> json) => _Assistant(
       age: (json['age'] as num).toInt(),
     );
 
-Map<String, dynamic> _$AssistantToJson(_Assistant instance) => <String, dynamic>{
+Map<String, dynamic> _$AssistantToJson(_Assistant instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'age': instance.age,
     };

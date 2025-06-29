@@ -246,12 +246,18 @@ final class $FreezedMapCopyWith<K, V, $Res> {
   /// The `$FreezedMapCopyWith` can be modified again and used to create any number
   /// of `FreezedMap`s.
 
-  $Res seal() {
+  $Res build() {
     _mapOwner ??= _FreezedMap<K, V>.withSafeMap(_mapFactory, _map);
     return _then(FreezedMap(
       _mapOwner ?? _map,
     ));
   }
+
+  /// Converts to a [FreezedMap].
+  ///
+  /// Same as [build]
+  @pragma('vm:prefer-inline')
+  $Res seal() => build();
 
   @pragma('vm:prefer-inline')
   $FreezedMapCopyWith<K, V, $Res> call({Map<K, V>? map}) {
@@ -461,7 +467,10 @@ final class $FreezedMapCopyWith<K, V, $Res> {
 /// Extensions for [FreezedMap] on [Map].
 extension FreezedMapExtension<K, V> on Map<K, V> {
   /// Converts to a [FreezedMap].
-  FreezedMap<K, V> seal() => FreezedMap<K, V>.of(this);
+  FreezedMap<K, V> build() => FreezedMap<K, V>.of(this);
+
+  /// Converts to a [FreezedMap] (same as [build]).
+  FreezedMap<K, V> seal() => build();
 }
 
 T _$identity<T>(T value) => value;

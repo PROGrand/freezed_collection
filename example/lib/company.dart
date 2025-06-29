@@ -9,5 +9,6 @@ part 'company.g.dart';
 abstract class Company with _$Company {
   factory Company({String? name, required Director director}) = _Company;
 
-  factory Company.fromJson(Map<String, dynamic> json) => _$CompanyFromJson(json);
+  factory Company.fromJson(Map<String, dynamic> json) =>
+      _$CompanyFromJson(json);
 }

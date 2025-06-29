@@ -22,7 +22,8 @@ mixin _$One {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $OneCopyWith<One> get copyWith => _$OneCopyWithImpl<One>(this as One, _$identity);
+  $OneCopyWith<One> get copyWith =>
+      _$OneCopyWithImpl<One>(this as One, _$identity);
 
   /// Serializes this One to a JSON map.
   Map<String, dynamic> toJson();
@@ -109,7 +110,8 @@ class _One implements One {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$OneCopyWith<_One> get copyWith => __$OneCopyWithImpl<_One>(this, _$identity);
+  _$OneCopyWith<_One> get copyWith =>
+      __$OneCopyWithImpl<_One>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -139,7 +141,8 @@ class _One implements One {
 
 /// @nodoc
 abstract mixin class _$OneCopyWith<$Res> implements $OneCopyWith<$Res> {
-  factory _$OneCopyWith(_One value, $Res Function(_One) _then) = __$OneCopyWithImpl;
+  factory _$OneCopyWith(_One value, $Res Function(_One) _then) =
+      __$OneCopyWithImpl;
   @override
   @useResult
   $Res call({String name, Two two});
@@ -195,7 +198,8 @@ mixin _$Two {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $TwoCopyWith<Two> get copyWith => _$TwoCopyWithImpl<Two>(this as Two, _$identity);
+  $TwoCopyWith<Two> get copyWith =>
+      _$TwoCopyWithImpl<Two>(this as Two, _$identity);
 
   /// Serializes this Two to a JSON map.
   Map<String, dynamic> toJson();
@@ -282,7 +286,8 @@ class _Two implements Two {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$TwoCopyWith<_Two> get copyWith => __$TwoCopyWithImpl<_Two>(this, _$identity);
+  _$TwoCopyWith<_Two> get copyWith =>
+      __$TwoCopyWithImpl<_Two>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -312,7 +317,8 @@ class _Two implements Two {
 
 /// @nodoc
 abstract mixin class _$TwoCopyWith<$Res> implements $TwoCopyWith<$Res> {
-  factory _$TwoCopyWith(_Two value, $Res Function(_Two) _then) = __$TwoCopyWithImpl;
+  factory _$TwoCopyWith(_Two value, $Res Function(_Two) _then) =
+      __$TwoCopyWithImpl;
   @override
   @useResult
   $Res call({int index, FreezedMap<String, int> three});
@@ -368,7 +374,8 @@ mixin _$IntMap {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $IntMapCopyWith<IntMap> get copyWith => _$IntMapCopyWithImpl<IntMap>(this as IntMap, _$identity);
+  $IntMapCopyWith<IntMap> get copyWith =>
+      _$IntMapCopyWithImpl<IntMap>(this as IntMap, _$identity);
 
   /// Serializes this IntMap to a JSON map.
   Map<String, dynamic> toJson();
@@ -394,7 +401,8 @@ mixin _$IntMap {
 
 /// @nodoc
 abstract mixin class $IntMapCopyWith<$Res> {
-  factory $IntMapCopyWith(IntMap value, $Res Function(IntMap) _then) = _$IntMapCopyWithImpl;
+  factory $IntMapCopyWith(IntMap value, $Res Function(IntMap) _then) =
+      _$IntMapCopyWithImpl;
   @useResult
   $Res call({int index, FreezedMap<int, int> map});
 
@@ -455,7 +463,8 @@ class _IntMap implements IntMap {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$IntMapCopyWith<_IntMap> get copyWith => __$IntMapCopyWithImpl<_IntMap>(this, _$identity);
+  _$IntMapCopyWith<_IntMap> get copyWith =>
+      __$IntMapCopyWithImpl<_IntMap>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -485,7 +494,8 @@ class _IntMap implements IntMap {
 
 /// @nodoc
 abstract mixin class _$IntMapCopyWith<$Res> implements $IntMapCopyWith<$Res> {
-  factory _$IntMapCopyWith(_IntMap value, $Res Function(_IntMap) _then) = __$IntMapCopyWithImpl;
+  factory _$IntMapCopyWith(_IntMap value, $Res Function(_IntMap) _then) =
+      __$IntMapCopyWithImpl;
   @override
   @useResult
   $Res call({int index, FreezedMap<int, int> map});

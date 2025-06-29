@@ -38,11 +38,11 @@ void main() {
 
       final newCompany = company.copyWith.director.assistants
           .updateValue(3, (p0) => Assistant(age: 3, name: '3'))
-          .seal();
+          .build();
 
       Company? newCompany2 = newCompany.copyWith.director.assistants
           .updateAllValues((p0, p1) => p1.copyWith(age: 21))
-          .seal();
+          .build();
 
       printT(newCompany);
       printT(newCompany2);

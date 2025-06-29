@@ -297,7 +297,7 @@ class $FreezedSetCopyWith<E, $Res> {
   ///
   /// The `$FreezedSetCopyWith` can be modified again and used to create any number
   /// of `FreezedSet`s.
-  $Res seal() {
+  $Res build() {
     if (_setOwner == null) {
       _withOwner(_FreezedSet<E>.withSafeSet(_setFactory, _set));
     }
@@ -305,6 +305,12 @@ class $FreezedSetCopyWith<E, $Res> {
       _setOwner ?? _set,
     ))!;
   }
+
+  /// Converts to a [FreezedSet].
+  ///
+  /// Same as [build]
+  @pragma('vm:prefer-inline')
+  $Res seal() => build();
 
   /// Applies a function to `this`.
   @pragma('vm:prefer-inline')

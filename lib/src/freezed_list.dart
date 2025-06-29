@@ -279,7 +279,7 @@ final class $FreezedListCopyWith<E, $Res> {
   ///
   /// The `$FreezedListCopyWith` can be modified again and used to create any number
   /// of `FreezedList`s.
-  $Res seal() {
+  $Res build() {
     if (_listOwner == null) {
       _setOwner(_FreezedList<E>.withSafeList(_list));
     }
@@ -287,6 +287,12 @@ final class $FreezedListCopyWith<E, $Res> {
       _listOwner ?? _list,
     ))!;
   }
+
+  /// Converts to a [FreezedList].
+  ///
+  /// Same as [build]
+  @pragma('vm:prefer-inline')
+  $Res seal() => build();
 
   @pragma('vm:prefer-inline')
   $FreezedListCopyWith<E, $Res> call(Iterable list) {

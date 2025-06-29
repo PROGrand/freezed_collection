@@ -37,15 +37,15 @@ final one = One('a', Two(1, FreezedMap({'1': 2, '3': 4})));
 then you can use `copyWith` chain:
 ```dart
 final two = one.copyWith.two.three.withBase(() =>
-    SplayTreeMap()).remove('1').addAll({'5': 6, '7': 8}).seal();
+    SplayTreeMap()).remove('1').addAll({'5': 6, '7': 8}).build();
 ```
 [//]: # ( @formatter:on)
 
-## Sealing
+## Building
 
 `copyWith` returns mutable builder with methods mapped to corresponding collection interface.
 
-`seal()` method should be used to build freezed collection.
+`build()` method should be used to build freezed collection (previously known as `seal()`).
 
 ## Chaining
 
@@ -55,7 +55,7 @@ final map = FreezedMap({'1': 1});
 final map2 = map.copyWith(map: {'2': 2, '3': 3})
     .updateAllValues((k, p0) => p0 + 1)
     .removeWhere((k, v) => 2 == v)
-    .seal();
+    .build();
 ```
 [//]: # ( @formatter:on)
 

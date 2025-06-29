@@ -42,7 +42,7 @@ void main() async {
   group('FreezedMap Demo', () {
     test('FreezedMap Demo', () {
       final one = One('a', Two(1, FreezedMap({'1': 2, '3': 4})));
-      final two = one.copyWith.two.three.addAll({'5': 6, '7': 8}).seal();
+      final two = one.copyWith.two.three.addAll({'5': 6, '7': 8}).build();
 
       final json = jsonEncode(two.toJson());
       final dec = One.fromJson(jsonDecode(json));
@@ -56,7 +56,7 @@ void main() async {
   group('FreezedMap Map Interface', () {
     test('has call', () {
       final map = FreezedMap({'1': 1});
-      final map2 = map.copyWith(map: {'2': 2, '3': 3}).seal();
+      final map2 = map.copyWith(map: {'2': 2, '3': 3}).build();
 
       expect(map.toMap(), equals({'1': 1}));
       expect(map2.toMap(), equals({'2': 2, '3': 3}));
@@ -64,7 +64,7 @@ void main() async {
 
     test('has replace', () {
       final map = FreezedMap({'1': 1, '3': 3});
-      final map2 = map.copyWith.replace({'2': 2}).seal();
+      final map2 = map.copyWith.replace({'2': 2}).build();
 
       expect(map.toMap(), equals({'1': 1, '3': 3}));
       expect(map2.toMap(), equals({'2': 2}));
@@ -72,7 +72,7 @@ void main() async {
 
     test('has withBase', () {
       final map = FreezedMap({'2': 1, '1': 1, '3': 1, '0': 1});
-      final map2 = map.copyWith.withBase(() => SplayTreeMap()).seal();
+      final map2 = map.copyWith.withBase(() => SplayTreeMap()).build();
 
       expect(map.toMap(), equals({'2': 1, '1': 1, '3': 1, '0': 1}));
       expect(map2.entries.map((e) => e.key).toList(),
@@ -81,7 +81,7 @@ void main() async {
 
     test('has withDefaultBase', () {
       final map = FreezedMap({'2': 1, '1': 1, '3': 1, '0': 1});
-      final map2 = map.copyWith.withDefaultBase().seal();
+      final map2 = map.copyWith.withDefaultBase().build();
 
       expect(map.toMap(), equals({'2': 1, '1': 1, '3': 1, '0': 1}));
       expect(map2.entries.map((e) => e.key).toList(),
@@ -90,8 +90,8 @@ void main() async {
 
     test('has addIterable', () {
       final map = FreezedMap({'1': 1, '2': 2, '3': 3});
-      final map2 = map.copyWith
-          .addIterable([4, 5, 6], key: (p0) => '$p0', value: (p0) => p0).seal();
+      final map2 = map.copyWith.addIterable([4, 5, 6],
+          key: (p0) => '$p0', value: (p0) => p0).build();
 
       expect(map.toMap(), equals({'1': 1, '2': 2, '3': 3}));
       expect(map2.toMap(),
@@ -103,7 +103,7 @@ void main() async {
       final map2 = map.copyWith
           .putIfAbsent('3', () => 3)
           .putIfAbsent('4', () => 4)
-          .seal();
+          .build();
 
       expect(map.toMap(), equals({'1': 1, '2': 2, '3': 3}));
       expect(map2.toMap(), equals({'1': 1, '2': 2, '3': 3, '4': 4}));
@@ -111,7 +111,7 @@ void main() async {
 
     test('has addAll', () {
       final map = FreezedMap({'1': 1, '2': 2, '3': 3});
-      final map2 = map.copyWith.addAll({'4': 4, '5': 5, '6': 6}).seal();
+      final map2 = map.copyWith.addAll({'4': 4, '5': 5, '6': 6}).build();
 
       expect(map.toMap(), equals({'1': 1, '2': 2, '3': 3}));
       expect(map2.toMap(),
@@ -120,7 +120,7 @@ void main() async {
 
     test('has remove', () {
       final map = FreezedMap({'1': 1, '2': 2, '3': 3});
-      final map2 = map.copyWith.remove('1').seal();
+      final map2 = map.copyWith.remove('1').build();
 
       expect(map.toMap(), equals({'1': 1, '2': 2, '3': 3}));
       expect(map2.toMap(), equals({'2': 2, '3': 3}));
@@ -131,7 +131,7 @@ void main() async {
       final map2 = map.copyWith
           .removeWhere((k, v) => k == '1')
           .removeWhere((k, v) => 2 == v)
-          .seal();
+          .build();
 
       expect(map.toMap(), equals({'1': 1, '2': 2, '3': 3}));
       expect(map2.toMap(), equals({'3': 3}));
@@ -139,7 +139,7 @@ void main() async {
 
     test('has clear', () {
       final map = FreezedMap({'1': 1, '2': 2, '3': 3});
-      final map2 = map.copyWith.clear().seal();
+      final map2 = map.copyWith.clear().build();
 
       expect(map.toMap(), equals({'1': 1, '2': 2, '3': 3}));
       expect(map2.toMap(), isEmpty);
@@ -148,7 +148,7 @@ void main() async {
     test('has addEntries', () {
       final map = FreezedMap({'1': 1, '2': 2, '3': 3});
       final map2 =
-          map.copyWith.addEntries([MapEntry('4', 4), MapEntry('5', 5)]).seal();
+          map.copyWith.addEntries([MapEntry('4', 4), MapEntry('5', 5)]).build();
 
       expect(map.toMap(), equals({'1': 1, '2': 2, '3': 3}));
       expect(map2.toMap(), equals({'1': 1, '2': 2, '3': 3, '4': 4, '5': 5}));
@@ -163,7 +163,7 @@ void main() async {
             (p0) => p0++,
             ifAbsent: () => -1,
           )
-          .seal();
+          .build();
 
       expect(map.toMap(), equals({'1': 1, '2': 2, '3': 3}));
       expect(map2.toMap(), equals({'0': -1, '1': 2, '2': 2, '3': 3}));
@@ -171,7 +171,7 @@ void main() async {
 
     test('has updateAllValues', () {
       final map = FreezedMap({'1': 1, '2': 2, '3': 3});
-      final map2 = map.copyWith.updateAllValues((k, p0) => p0 + 1).seal();
+      final map2 = map.copyWith.updateAllValues((k, p0) => p0 + 1).build();
 
       expect(map.toMap(), equals({'1': 1, '2': 2, '3': 3}));
       expect(map2.toMap(), equals({'1': 2, '2': 3, '3': 4}));
@@ -283,8 +283,8 @@ void main() async {
               .replace(FreezedMap.of({3: 3, 4: 4})
                   .copyWith
                   .withBase(() => SplayTreeMap())
-                  .seal())
-              .seal()
+                  .build())
+              .build()
               .toMap(),
           equals({3: 3, 4: 4}));
 
@@ -297,7 +297,7 @@ void main() async {
           FreezedMap.of({1: 1, 2: 2})
               .copyWith
               .addIterable([3, 4])
-              .seal()
+              .build()
               .toMap(),
           equals({1: 1, 2: 2, 3: 3, 4: 4}));
     });
@@ -319,7 +319,7 @@ void main() async {
 
     test('seal', () {
       expect(
-          {1: 1, 2: 2}.seal(),
+          {1: 1, 2: 2}.build(),
           isA<FreezedMap<int, int>>()
               .having((p0) => p0.toMap(), 'freezed map', equals({1: 1, 2: 2})));
     });
